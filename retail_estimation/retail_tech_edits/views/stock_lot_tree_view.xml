@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_stock_lot_tree_inherit_qty">
+            <field name="name">stock.lot.tree.inherit.qty</field>
+            <field name="model">stock.lot</field>
+            <field name="inherit_id" ref="stock.view_production_lot_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_id']" position="after">
+                    <field name="product_qty"/>
+                    <field name="alert_date"/>
+                    <field name="use_date"/>
+                    <field name="removal_date"/>
+                    <field name="expiration_date"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

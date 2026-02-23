@@ -1,0 +1,675 @@
+<t t-name="sdk_edit2026.report_sdk_quotation">
+    <t t-call="web.html_container">
+        <t t-call="sdk_edit2026.new_external_layout">
+            <t t-foreach="docs" t-as="doc">
+                <link rel="stylesheet" href="/sdk_edit2026/static/src/css/style.css"/>
+
+                <div class="page-container">
+                    <!--                        <div class="water-mark-img" t-if="report_type == 'pdf'">-->
+                    <!--                            <img src="/sdk_edit2026/static/src/img/Logo.jpg"-->
+                    <!--                                 style="position:absolute;height:200px; width:300px; opacity: 1;"/>-->
+                    <!--                        </div>-->
+
+                    <div class="content page-content">
+                        <!-- ========== 1. Logo Frame ========== -->
+                        <div class="logo-frame-wrapper">
+                            <div class="logo-frame">
+                                <img src="/sdk_edit2026/static/src/img/company-logo.png" class="company-logo"/>
+                            </div>
+                        </div>
+
+                        <!-- ========== 2. Information Table ========== -->
+                        <div class="info-section">
+                            <table class="info-table table-borderless">
+                                <tr>
+                                    <td class="info-left-cell">
+                                        <div class="contact-info">
+                                            <div class="contact-details">
+                                                <div class="contact-item">
+                                                    <strong>Telephone:</strong>
+                                                    <span t-field="doc.company_id.phone" class="contact-value"/>
+                                                </div>
+                                                <div class="contact-item">
+                                                    <strong>Mobile:</strong>
+                                                    <span t-field="doc.company_id.new_mobile_field"
+                                                          class="contact-value"/>
+                                                </div>
+                                                <div class="contact-item">
+                                                    <strong>Email:</strong>
+                                                    <span t-field="doc.company_id.email" class="contact-value"/>
+                                                </div>
+                                                <div class="contact-item">
+                                                    <strong>Website:</strong>
+                                                    <a t-att-href="doc.company_id.website" class="contact-link">
+                                                        <span t-field="doc.company_id.website"/>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="client-info">
+                                            <div class="client-details">
+                                                <div class="client-item">
+                                                    <strong>Client Name:</strong>
+                                                    <span t-field="doc.partner_id.name" class="client-value"/>
+                                                </div>
+                                                <div class="client-item">
+                                                    <strong>Project:</strong>
+                                                    <span t-if="doc.project_id" t-field="doc.project_id.name"/>
+                                                    <span t-else="">Not Set</span>
+                                                </div>
+                                                <div class="client-item">
+                                                    <strong>Location:</strong>
+                                                    <span t-if="doc.project_id and doc.project_id.location"
+                                                          t-field="doc.project_id.location"/>
+                                                    <span t-elif="doc.partner_id and doc.partner_id.city"
+                                                          t-field="doc.partner_id.city"/>
+                                                    <span t-else="">Not Set</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td class="info-right-cell">
+                                        <h1 class="quotation-title">QUOTATION</h1>
+
+                                        <div class="quotation-details">
+                                            <div class="quotation-item">
+                                                <strong>Quotation No:</strong>
+                                                <span t-field="doc.name" class="quotation-value"/>
+                                            </div>
+                                            <div class="quotation-item">
+                                                <strong>Page:</strong>
+                                                <span t-field="doc.page_numbers" class="quotation-value"/>
+                                                Pages
+                                            </div>
+                                            <div class="quotation-item">
+                                                <strong>Date:</strong>
+                                                <span t-field="doc.date_order"
+                                                      t-options="{&quot;widget&quot;: &quot;date&quot;, &quot;format&quot;: &quot;dd-MMM-yyyy&quot;}"
+                                                      class="quotation-value"/>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <!-- ========== 4. Summary Table ========== -->
+                        <div class="summary-section">
+                            <t t-set="summary_data" t-value="json.loads(doc.sdk_summary_data or '{}')"/>
+
+                            <t t-if="summary_data and 'categories' in summary_data">
+                                <table class="summary-table">
+                                    <tr class="summary-header-row">
+                                        <td class="summary-title" colspan="3" style="padding-right:55px;">SUMMARY
+                                        </td>
+                                    </tr>
+
+                                    <tr class="summary-column-headers">
+                                        <th class="summary-header sn-column">SN</th>
+                                        <th class="summary-header description-column">Description</th>
+                                        <th class="summary-header total-column text-center" style="padding-right:12px;">
+                                            Total
+                                        </th>
+                                    </tr>
+
+                                    <t t-set="counter" t-value="0"/>
+                                    <t t-foreach="summary_data['categories']" t-as="category">
+                                        <t t-set="counter" t-value="counter + 1"/>
+                                        <tr class="summary-data-row">
+                                            <td class="summary-data sn-data">
+                                                <t t-esc="counter"/>
+                                            </td>
+                                            <td class="summary-data description-data">
+                                                <t t-esc="category['category_name']"/>
+                                            </td>
+                                            <td class="summary-data total-data text-center">
+                                                <div class="fanta-001">
+                                                    <t t-set="val" t-value="category['total']"/>
+                                                    <t t-esc="'{0:,.2f}'.format(val) if val % 1 else '{0:,.0f}'.format(val)"/>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </t>
+
+                                    <tr class="summary-total-row">
+                                        <td class="summary-data sn-data-fanta"/>
+                                        <td class="summary-data grand-total-label">
+                                            <div class="grand-total-text">Grand Total</div>
+                                        </td>
+                                        <td class="summary-data grand-total-value text-center">
+                                            <div class="fanta-001">
+                                                <t t-set="val" t-value="summary_data.get('grand_total', 0)"/>
+                                                <t t-esc="'{0:,.2f}'.format(val) if val % 1 else '{0:,.0f}'.format(val)"/>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="summary-discount-row">
+                                        <td class="summary-data sn-data-fanta"/>
+                                        <td class="summary-data discount-label">
+                                            <div class="discount-text">Discount</div>
+                                        </td>
+                                        <td class="summary-data discount-value text-center">
+                                            <div class="fanta-001">
+                                                <t t-set="val" t-value="summary_data.get('total_discount', 0)"/>
+                                                <t t-esc="'{0:,.2f}'.format(val) if val % 1 else '{0:,.0f}'.format(val)"/>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="summary-final-row">
+                                        <td class="summary-data sn-data-fanta"/>
+                                        <td class="summary-data total-amount-label">
+                                            <div class="total-amount-text">Total Amount</div>
+                                        </td>
+                                        <td class="summary-data total-amount-value text-center">
+                                            <div class="fanta-001">
+                                                <t t-set="val" t-value="summary_data.get('grand_total', 0)"/>
+                                                <t t-esc="'{0:,.2f}'.format(val) if val % 1 else '{0:,.0f}'.format(val)"/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </t>
+                            <t t-else="">
+                                <p class="no-data-message">No summary data available</p>
+                            </t>
+                        </div>
+
+                        <!-- ========== Detailed Category Tables (Parent → Child) ========== -->
+                        <div class="category-section">
+                            <t t-set="lines_data" t-value="json.loads(doc.sdk_category_lines_data or '{}')"/>
+
+                            <t t-if="lines_data and 'parents' in lines_data">
+                                <t t-set="parent_counter" t-value="0"/>
+
+                                <t t-foreach="lines_data['parents']" t-as="parent">
+                                    <t t-set="parent_counter" t-value="parent_counter + 1"/>
+
+                                    <!-- ================= PARENT TABLE ================= -->
+                                    <!-- ================= PARENT TABLE ================= -->
+                                    <table class="category-table">
+                                        <!-- Parent Header -->
+                                        <tr class="category-header-row">
+                                            <td class="category-title" colspan="8">
+                                                <t t-esc="parent_counter"/> &gt;
+                                                <t t-esc="parent['parent_name']"/>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Table Columns -->
+                                        <tr class="category-column-headers">
+                                            <th class="category-header sn-col">SN</th>
+                                            <th class="category-header item-col">Item Description</th>
+                                            <th class="category-header photo-col">Photo</th>
+                                            <th class="category-header brand-col">Brand</th>
+                                            <th class="category-header model-col">Model</th>
+                                            <th class="category-header qty-col">QTY</th>
+                                            <th class="category-header price-col">Unit Price</th>
+                                            <th class="category-header total-col">Total</th>
+                                        </tr>
+
+                                        <t t-set="line_counter" t-value="0"/>
+
+                                        <!-- ================= CHILD CATEGORIES ================= -->
+                                        <t t-foreach="parent['children']" t-as="child">
+                                            <!-- Child Category Row - يجب أن تكون داخل tr -->
+                                            <tr>
+                                                <td colspan="8" class="child-category-title">
+                                                    <div class="child-category-text">
+                                                        <t t-esc="child['child_name']"/>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            <!-- Product Lines -->
+                                            <t t-foreach="child['lines']" t-as="line">
+                                                <t t-set="line_counter" t-value="line_counter + 1"/>
+
+                                                <tr class="category-data-row">
+                                                    <td class="category-data sn-data">
+                                                        <t t-esc="line_counter"/>
+                                                    </td>
+
+                                                    <td class="category-data item-data">
+                                                        <t t-esc="line['name']"/>
+                                                    </td>
+
+                                                    <td class="category-data photo-data">
+                                                        <img t-if="line.get('product_id')"
+                                                             t-att-src="image_data_uri(doc.env['product.product'].browse(line['product_id']).image_1920)"
+                                                             class="product-image"/>
+                                                    </td>
+
+                                                    <td class="category-data brand-data">
+                                                        <t t-esc="line['brand']"/>
+                                                    </td>
+
+                                                    <td class="category-data model-data">
+                                                        <t t-esc="line['model']"/>
+                                                    </td>
+
+                                                    <td class="category-data qty-data">
+                                                        <t t-set="val" t-value="line['quantity']"/>
+                                                        <t t-esc="'%.2f' % val if val % 1 else int(val)"/>
+                                                    </td>
+
+                                                    <td class="category-data price-data">
+                                                        <div class="fanta-002">
+                                                            <t t-set="val" t-value="line['price_unit']"/>
+                                                            <t t-esc="'{0:,.2f}'.format(val) if val % 1 else '{0:,.0f}'.format(val)"/>
+                                                        </div>
+                                                    </td>
+
+                                                    <td class="category-data line-total-data text-center">
+                                                        <div class="fanta-001">
+                                                            <t t-set="val" t-value="line['price_subtotal']"/>
+                                                            <t t-esc="'{0:,.2f}'.format(val) if val % 1 else '{0:,.0f}'.format(val)"/>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </t>
+
+                                        <!-- Parent Total -->
+                                        <tr class="category-total-row">
+                                            <td colspan="7" class="category-total-label">Total</td>
+                                            <td class="category-total-value text-center">
+                                                <div class="fanta-001">
+                                                    <t t-set="val" t-value="parent['total']"/>
+                                                    <t t-esc="'{0:,.2f}'.format(val) if val % 1 else '{0:,.0f}'.format(val)"/>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                </t>
+                            </t>
+
+                            <t t-else="">
+                                <p class="no-data-message">No detailed line data available</p>
+                            </t>
+                        </div>
+
+                        <!-- ========== 6. Terms & Condition Table  ========== -->
+                        <div class="tnc-section">
+                            <t t-if="doc.term_line_ids">
+                                <table class="tnc-table">
+                                    <tr class="summary-header-row">
+                                        <td class="summary-title" colspan="4">TERM AND CONDITION</td>
+                                    </tr>
+                                    <!-- Header -->
+                                    <tr class="tnc-header-row">
+                                        <th class="tnc-stage-col" style="padding-left:10px!important;">STAGES</th>
+                                        <th class="tnc-coverage-col">COVERAGE</th>
+                                        <th class="tnc-percentage-col" colspan="2">PERCENTAGE</th>
+                                        <!--                                            <th class="tnc-amount-col">AMOUNT</th>-->
+                                    </tr>
+
+                                    <!-- Data rows -->
+                                    <t t-set="counter" t-value="0"/>
+                                    <t t-foreach="doc.term_line_ids" t-as="term">
+                                        <t t-set="counter" t-value="counter + 1"/>
+                                        <tr class="tnc-data-row">
+                                            <td class="tnc-stage-data">
+                                                <t t-esc="counter"/>
+                                            </td>
+                                            <td class="tnc-coverage-data">
+                                                <t t-if="counter == 1">
+                                                    <span style="color: red; font-weight: bold; border-bottom: 1px solid red; padding-bottom: 1px; display: inline-block; margin-bottom: 2px;">
+                                                        Advanced Payment:
+                                                    </span>
+                                                    <br/>
+                                                </t>
+                                                <strong style="color: red !important;">
+                                                    <t>Covers:</t>
+                                                </strong>
+                                                <t t-raw="term.description"/>
+                                            </td>
+                                            <td class="tnc-percentage-data"><t t-esc="int(term.percentage)"/>%
+                                            </td>
+                                            <td class="tnc-amount-data">
+                                                <div class="tnc-amount-data-div">
+                                                    <t t-set="val" t-value="term.amount"/>
+                                                    <t t-esc="'{0:,.2f}'.format(val) if val % 1 else '{0:,.0f}'.format(val)"/>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </t>
+
+                                    <!-- Total row -->
+                                    <tr class="tnc-total-row">
+                                        <td colspan="2" class="tnc-total-label">Total
+                                        </td>
+                                        <td class="tnc-total-value" colspan="2">
+                                            <t t-set="val" t-value="doc.term_total"/>
+                                            <t t-esc="'{0:,.2f}'.format(val) if val % 1 else '{0:,.0f}'.format(val)"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </t>
+                            <t t-else="">
+                                <p>No Terms &amp; Conditions added.</p>
+                            </t>
+                        </div>
+
+
+                        <!-- ========== 7. Contract Terms ========== -->
+                        <div class="terms-section">
+                            <table class="terms-table table-borderless">
+
+                                <!-- OUR CONTRACT INCLUDES -->
+                                <tr class="terms-row section-contract-includes">
+                                    <td class="terms-col terms-en">
+                                        <p class="terms-title">OUR CONTRACT INCLUDES:</p>
+                                        <p class="terms-text">
+                                            Site Marking, Supervision, DB Dressing, System Fixing, Testing and
+                                            Commissioning.
+                                        </p>
+                                    </td>
+                                    <td class="terms-col terms-ar" dir="rtl">
+                                        <p class="terms-title-ar">يشمل عقدنا:</p>
+                                        <p class="terms-text-ar">
+                                            وضع علامات على الموقع، الإشراف، تجهيز لوحة التوزيع،
+                                            تركيب النظام، الاختبار والتشغيل.
+                                        </p>
+                                    </td>
+                                </tr>
+
+                                <!-- INSTALLATION IS EXCLUDED -->
+                                <tr class="terms-row section-installation-excluded">
+                                    <td class="terms-col terms-en">
+                                        <p class="terms-title">INSTALLATION IS EXCLUDED:</p>
+                                        <ul class="terms-list">
+                                            <li>Supply and installation of Conduit pipes or cable pulling electrical
+                                            </li>
+                                            <li>Breaking, painting, plastering or any other civil works</li>
+                                            <li>Supply of main electrical current or internet Etisalat</li>
+                                        </ul>
+                                    </td>
+                                    <td class="terms-col terms-ar" dir="rtl">
+                                        <p class="terms-title-ar">لا يشمل التركيب:</p>
+                                        <ul class="terms-list-ar">
+                                            <li>توريد وتركيب أنابيب التوصيل أو سحب الكابلات الكهربائية</li>
+                                            <li>أعمال الهدم، الدهان، المحارة أو أي أعمال مدنية أخرى</li>
+                                            <li>توريد التيار الكهربائي الرئيسي أو إنترنت اتصالات</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+
+                                <!-- CABLES & ACCESSORIES -->
+                                <tr class="terms-row section-cables">
+                                    <td class="terms-col terms-en">
+                                        <p class="terms-title">CABLES &amp; ACCESSORIES:</p>
+                                        <p class="terms-text">
+                                            Cables and Accessories are pre-calculated and included in the
+                                            installation price.
+                                        </p>
+                                    </td>
+                                    <td class="terms-col terms-ar" dir="rtl">
+                                        <p class="terms-title-ar">الكابلات والملحقات:</p>
+                                        <p class="terms-text-ar">
+                                            يتم احتساب الكابلات والملحقات مسبقاً وهي مشمولة في سعر التركيب.
+                                        </p>
+                                    </td>
+                                </tr>
+
+                                <!-- LIABILITY -->
+                                <tr class="terms-row section-liability">
+                                    <td class="terms-col terms-en">
+                                        <p class="terms-title">SDK Smart Security System is not liable for:</p>
+                                        <ul class="terms-list">
+                                            <li>Manual work, wiring and installation beyond the scope mentioned</li>
+                                            <li>Misuse of products</li>
+                                            <li>Any unauthorized or third party repairs</li>
+                                        </ul>
+                                    </td>
+                                    <td class="terms-col terms-ar" dir="rtl">
+                                        <p class="terms-title-ar">شركة اس دي كي سمارت سيكيوريتي غير مسؤولة عن:</p>
+                                        <ul class="terms-list-ar">
+                                            <li>اي عمل اضافي و اضافه مواد خارج النطاق المذكور في هذا العرض</li>
+                                            <li>إساءة استخدام المنتجات</li>
+                                            <li>أي إصلاحات غير مصرح بها أو من طرف ثالث</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+
+                                <!-- WARRANTY -->
+                                <tr class="terms-row section-warranty">
+                                    <td class="terms-col terms-en">
+                                        <p class="terms-subtitle">WARRANTY</p>
+                                        <ul class="terms-list">
+                                            <li>Two Years standard warranty on manufacturing defects, starting from
+                                                the dates of delivered.
+                                            </li>
+                                            <li>Warranty covers only the items mentioned in this offer.</li>
+                                            <li>Extension of Warranty period is offered at additional costs.</li>
+                                            <li>Warranty covers all devices except for adapters and the Internet
+                                                disconnection.
+                                            </li>
+                                            <li>Warranty shall be void in the event of any unauthorized repairs or
+                                                modifications by a third party.
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td class="terms-col terms-ar" dir="rtl">
+                                        <p class="terms-subtitle-ar">الضمان</p>
+                                        <ul class="terms-list-ar">
+                                            <li>ضمان قياسي لمدة سنتين على عيوب التصنيع ابتداءً من تاريخ التسليم.
+                                            </li>
+                                            <li>يغطي الضمان فقط العناصر المذكورة في هذا العرض.</li>
+                                            <li>يتم تمديد فترة الضمان بتكاليف إضافية.</li>
+                                            <li>يغطي الضمان جميع الأجهزة ما عدا المحولات وانقطاع الإنترنت.</li>
+                                            <li>يلغى الضمان في حال أي إصلاحات أو تعديل غير مصرح بها من طرف ثالث.
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+
+                                <!-- AMC -->
+                                <tr class="terms-row section-amc">
+                                    <td class="terms-col terms-en">
+                                        <p class="terms-subtitle">Annual Maintenance Contract (AMC)</p>
+                                        <p class="terms-text">
+                                            The term of the contract is <strong>Two Years</strong> starting from
+                                            Handover stage And
+                                            It will cover main system spare parts, preventive maintenance, and
+                                            routine maintenance.
+                                        </p>
+                                    </td>
+                                    <td class="terms-col terms-ar" dir="rtl">
+                                        <p class="terms-subtitle-ar">عقد الصيانة السنوي (AMC)</p>
+                                        <p class="terms-text-ar">
+                                            مدة عقد الصيانة سنتين تبدأ من مرحلة التسليم وستغطي قطع غيار النظام
+                                            الرئيسي والصيانة الوقائية والصيانة الروتينية.
+                                        </p>
+                                    </td>
+                                </tr>
+
+                                <!-- INSTALLATION -->
+                                <tr class="terms-row section-installation">
+                                    <td class="terms-col terms-en">
+                                        <p class="terms-title">Installation:</p>
+                                        <ul class="terms-list">
+                                            <li>Work on the project begins after receiving the first payment,
+                                                detailed above, into the SDK Smart Security System Bank Account.
+                                            </li>
+                                            <li>Installation will be by phases (TBA after services approval).</li>
+                                            <li>Delays in starting the Installation and/or Completion, due to site’s
+                                                conditions and readiness, is the responsibility of the client.
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td class="terms-col terms-ar" dir="rtl">
+                                        <p class="terms-title-ar">التركيب:</p>
+                                        <ul class="terms-list-ar">
+                                            <li>يبدأ العمل بالمشروع بعد استلام الدفعة الأولى بالكامل، المفصلة أعلاه،
+                                                إلى الحساب البنكي لشركة اس دي كي سمارت سكيورتي سستم.
+                                            </li>
+                                            <li>سيتم التركيب على مراحل (سيتم الإعلان عنها بعد الموافقة على عرض
+                                                السعر).
+                                            </li>
+                                            <li>التأخير في بدء التركيب أو عدم إكمال تركيب الأجهزة بسبب ظروف الموقع
+                                                والجاهزية هي مسؤولية العميل.
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+
+                                <!-- NOTES -->
+                                <tr class="terms-row section-notes">
+                                    <td class="terms-col terms-en">
+                                        <p class="terms-subtitle">NOTES:</p>
+                                        <ul class="terms-list">
+                                            <li>NOTE : Any devices required from AC supplier , it will quote
+                                                separately
+                                            </li>
+                                            <li>The air conditioning system must be compatible with the smart home
+                                                systems and in the event that additional control devices are
+                                                required (either from a second party or any third party) an
+                                                additional price will be submitted separately
+                                            </li>
+                                            <li>Acceptance of this offer and payment shall be considered an approval
+                                                of this agreement and all of its terms and conditions.
+                                            </li>
+                                            <li>All quotes are priced for projects in UAE only.</li>
+                                            <li>The Client should not hold The payment for other issues (Internet
+                                                ,power, etc.)
+                                            </li>
+                                            <li>It is allowed to make a programming modification in the smart home
+                                                within a maximum period of 60 days.
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td class="terms-col terms-ar" dir="rtl">
+                                        <p class="terms-subtitle-ar">ملاحظات:</p>
+                                        <ul class="terms-list-ar">
+                                            <li>ملاحظة: أي أجهزة إضافية مطلوبة من مورد التكييف ، سيتم تقديم عرض سعر
+                                                بشكل منفصل
+                                            </li>
+                                            <li>يجب أن يكون نظام التكييف متوافق مع أنظمة المنزل الذكي وفي حال تتطلب
+                                                أجهزة تحكم إضافية (إما من طرف ثانٍ أو أي طرف ثالث) فسيتم تقديم عرض
+                                                سعر إضافي بشكل منفصل
+                                            </li>
+                                            <li>يعتبر قبول هذا العرض والدفع موافقة على هذه الاتفاقية وعلى جميع
+                                                بنودها وشروطها.
+                                            </li>
+                                            <li>يتم تسعير جميع عروض الأسعار للمشاريع في الإمارات العربية المتحدة
+                                                فقط.
+                                            </li>
+                                            <li>يجب على العميل ألا يوقف مدفوعاتنا مقابل مشكلات أخرى (الإترنت ،
+                                                الطاقة ، إلخ) .
+                                            </li>
+                                            <li>يسمح اجراء تعديل في برمجة المنزل الذكي ضمن فترة اقصاها 60 يوم</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </div>
+
+
+                        <div class="validity-section-correct">
+                            <div class="validity-correct-container">
+                                <span class="vc-left">Validity:</span>
+                                <span class="vc-center">30 Days only</span>
+                                <span class="vc-right" dir="rtl">صلاحية:</span>
+                            </div>
+                        </div>
+                        <!-- ========== 8. Bank Account Details ========== -->
+                        <div class="bank-section-simple">
+                            <!-- العنوانين جنب بعض -->
+                            <!-- Bank Titles - Same as validity -->
+                            <div class="bank-titles-same">
+                                <div class="bank-titles-container">
+                                    <span class="bank-title-en-side">Bank account details:</span>
+                                    <span class="bank-title-ar-side" dir="rtl">تفاصيل الحساب البنكي</span>
+                                </div>
+                            </div>
+                            <!-- جدول البنك ديتيلز -->
+                            <table class="bank-details-table-simple table-borderless">
+                                <tr>
+                                    <!-- الإنجليزية على الشمال -->
+                                    <td class="bank-labels-left">
+                                        <div class="bank-label-row">
+                                            <span class="bank-label-text">Company Name:</span>
+                                        </div>
+                                        <div class="bank-label-row">
+                                            <span class="bank-label-text">Bank Name:</span>
+                                        </div>
+                                        <div class="bank-label-row">
+                                            <span class="bank-label-text">Bank Account No:</span>
+                                        </div>
+                                        <div class="bank-label-row">
+                                            <span class="bank-label-text">IBAN Number:</span>
+                                        </div>
+                                    </td>
+
+                                    <!-- القيم في المنتصف -->
+                                    <td class="bank-values-center">
+                                        <div class="bank-value-row">
+                                            <span class="bank-value-text">SDK Smart Security System</span>
+                                        </div>
+                                        <div class="bank-value-row">
+                                            <span class="bank-value-text">Abu Dhabi Commercial Bank</span>
+                                        </div>
+                                        <div class="bank-value-row">
+                                            <span class="bank-value-text">13997343820001</span>
+                                        </div>
+                                        <div class="bank-value-row">
+                                            <span class="bank-value-text">AE890030013997343820001</span>
+                                        </div>
+                                    </td>
+
+                                    <!-- العربية على اليمين -->
+                                    <td class="bank-labels-right" dir="rtl">
+                                        <div class="bank-label-row">
+                                            <span class="bank-label-text">اسم الشركة:</span>
+                                        </div>
+                                        <div class="bank-label-row">
+                                            <span class="bank-label-text">اسم البنك:</span>
+                                        </div>
+                                        <div class="bank-label-row">
+                                            <span class="bank-label-text">رقم الحساب:</span>
+                                        </div>
+                                        <div class="bank-label-row">
+                                            <span class="bank-label-text">رقم الآيبان:</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- جدول الموافقات -->
+                            <table class="approval-table-simple table-borderless">
+                                <tr>
+                                    <!-- SDK Approval على اليمين -->
+                                    <td class="approval-left">
+                                        <strong class="approval-title-right">SDK Smart Security System Approval:
+                                        </strong>
+                                        <div class="approval-space"/>
+                                        <div class="approval-line">Name:</div>
+                                        <div class="approval-line">Date:</div>
+                                        <div class="approval-line">Signature:</div>
+                                    </td>
+                                    <!-- Client Approval على الشمال -->
+                                    <td class="approval-right">
+                                        <strong class="approval-title-left" style="margin-right:200px;">Client
+                                            Approval:
+                                        </strong>
+                                        <div class="approval-space"/>
+                                        <div class="approval-line" style="margin-right:250px;">Name:</div>
+                                        <div class="approval-line" style="margin-right:250px;">Date:</div>
+                                        <div class="approval-line" style="margin-right:250px;">Signature:</div>
+                                    </td>
+
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </t>
+</t>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="helpdesk_ticket_inherit_form_view" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.inherit.form.view</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+        <field name="arch" type="xml">
+            <!-- Add branch and source_id fields after tag_ids -->
+            <xpath expr="//field[@name='tag_ids']" position="after">
+                <field name="source_id"/>
+                <field name="branch"/>
+            </xpath>
+
+            <!-- Add products page after extra_info page -->
+            <xpath expr="//page[@name='extra_info']" position="after">
+                <page name="products" string="Products">
+                    <field name="line_ids" nolabel="1">
+                        <tree editable="bottom" string="Ticket Products">
+                            <field name="product_id" domain="[('sale_ok', '=', True)]" optional="show"/>
+                            <field name="lot_id" optional="show"/>
+                            <field name="model" optional="show"/>
+                            <field name="problem_description" optional="show"/>
+                            <field name="status" optional="show"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

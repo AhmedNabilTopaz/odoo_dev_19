@@ -1,0 +1,163 @@
+<odoo>
+    <!-- Define a new custom report action for stock picking (transfer operations) -->
+    <record model="ir.actions.report" id="new_transfer_report">
+        <field name="name">New Picking Operations</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">Retail_tech.inventory_transfer_new_report</field>
+        <field name="binding_model_id" ref="stock.model_stock_picking"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <!-- Template for the custom Picking Operations report -->
+    <template id="inventory_transfer_new_report">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page">
+                        <!-- Display a barcode in the top-right corner for easy scanning -->
+                        <div style="text-align: right; margin-top:20px; margin-right:20px">
+                            <img t-att-src="'/report/barcode/Code128/%s' % doc.name" width="250" height="80"/>
+                        </div>
+
+                        <!-- Customer Information Section -->
+                        <strong style="font-weight:bold; font-size: 16px">Customer Name:</strong>
+                        <p style="font-weight:normal; font-size: 14px">
+                            <span t-esc="doc.partner_id.name"/>
+                            <br/>
+                            <span t-esc="doc.partner_id.street"/>
+                            <br/>
+                            <span t-esc="doc.partner_id.phone"/>
+                        </p>
+
+                        <!-- Display Picking Type and Name -->
+                        <span style="font-weight: normal;" t-field="doc.picking_type_id"/>
+                        <h1>
+                            <span t-esc="doc.name"/>
+                        </h1>
+
+                        <!-- Spacer for formatting -->
+                        <span>
+                            <br/>
+                        </span>
+
+                        <!-- Order Details Table -->
+                        <table class="table table-borderless">
+                            <thead>
+                                <tr style="border-bottom: 2px solid black;">
+                                    <th style="font-weight: bold;">Order (Origin)</th>
+                                    <th style="font-weight: bold;">State</th>
+                                    <th style="font-weight: bold;">Commitment Date</th>
+                                    <th style="font-weight: bold;">Scheduled Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="font-weight:normal;">
+                                    <td style="text-align: center; font-weight: normal;">
+                                        <span t-esc="doc.origin"/>
+                                    </td>
+                                    <td style="text-align: center; font-weight: normal;">
+                                        <span t-esc="doc.state"/>
+                                    </td>
+                                    <td style="text-align: center; font-weight: normal;">
+                                        <span t-field="doc.date_done"/>
+                                    </td>
+                                    <td style="text-align: center; font-weight: normal;">
+                                        <span t-field="doc.scheduled_date"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- Spacer for formatting -->
+                        <span>
+                            <br/>
+                        </span>
+                        <span>
+                            <br/>
+                        </span>
+
+                        <!-- Table to display transferred products -->
+                        <table class="table table-borderless">
+                            <thead>
+                                <tr style="border-bottom: 2px solid black">
+                                    <th style="font-weight: bold;">No</th>
+                                    <th style="font-weight: bold;">Product</th>
+                                    <th style="font-weight: bold;">Quantity</th>
+                                    <th style="font-weight: bold;">Source</th>
+                                    <th style="font-weight: bold;">Barcode</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="counter" t-value="0"/>
+                                <t t-foreach="doc.move_ids_without_package" t-as="line">
+                                    <t t-set="counter" t-value="counter + 1"/>
+                                    <tr style="border-bottom: 0.5px solid black;">
+                                        <td style="font-weight: norma;l" t-esc="counter"/>
+                                        <td style="font-weight: norma;">
+                                            <t t-esc="line.product_id.display_name"/>
+                                            <br/>
+                                            <small>
+                                                <t t-esc="line.product_id.barcode"/>
+                                            </small>
+                                        </td>
+                                        <td style="font-weight: normal;">
+                                            <t t-if="doc.state == 'done'">
+                                                <t t-esc="line.quantity_done"/>
+                                            </t>
+                                            <t t-else="">
+                                                <t t-esc="line.reserved_availability"/>
+                                            </t>
+                                        </td>
+                                        <td style="font-weight: normal;">
+                                            <t t-esc="line.location_id.complete_name"/>
+                                        </td>
+                                        <td>
+                                            <!-- Generate barcode for the product -->
+                                            <img t-att-src="'/report/barcode/Code128/%s' % line.product_id.barcode" height="50" width="150"/>
+
+                                            <!-- Table to display lot/serial numbers and their quantities -->
+                                            <t t-if="line.product_id.tracking != 'none' and line.move_line_nosuggest_ids">
+                                                <table class="table table-borderless">
+                                                    <thead>
+                                                        <tr style="border-bottom: 2px solid black;">
+                                                            <th style="text-align: left; font-weight: bold;">Lot</th>
+                                                            <th style="font-weight: bold">Qty</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <t t-foreach="line.move_line_nosuggest_ids" t-as="move_line">
+                                                            <tr style="border-bottom: 2px solid black;">
+                                                                <td>
+                                                                    <t t-esc="move_line.lot_id.name or ''"/>
+                                                                </td>
+                                                                <td>
+                                                                    <!--Always show 1 for serial numbers -->
+                                                                    <t t-if="line.product_id.tracking == 'serial'">
+                                                                        1.0
+                                                                    </t>
+                                                                    <t t-else="">
+                                                                        <t t-if="doc.state == 'done'">
+                                                                            <t t-esc="move_line.qty_done"/>
+                                                                        </t>
+                                                                        <t t-else="">
+                                                                            <t t-esc="move_line.reserved_qty"/>
+                                                                        </t>
+                                                                    </t>
+                                                                </td>
+                                                            </tr>
+                                                        </t>
+                                                    </tbody>
+                                                </table>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

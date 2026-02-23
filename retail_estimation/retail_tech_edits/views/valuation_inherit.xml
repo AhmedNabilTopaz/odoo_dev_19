@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="stock.menu_valuation" name="Locations"
+              parent="stock.menu_warehouse_report"
+              sequence="150"
+              action="stock.action_view_quants"
+              groups="stock.group_stock_multi_locations,stock.group_tracking_owner,base.group_no_one,stock.group_stock_user"/>
+</odoo>

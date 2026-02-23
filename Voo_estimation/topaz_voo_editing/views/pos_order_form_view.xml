@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="pos_order_form_inherit_topaz" model="ir.ui.view">
+        <field name="name">pos_order_form_inherit</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_order']" position="after">
+                <field name="purchase_date" string="V.M Sell Date" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_stock_valuation_layer_tree_inherit_custom" model="ir.ui.view">
+        <field name="name">stock.valuation.layer.tree.inherit.custom</field>
+        <field name="model">stock.valuation.layer</field>
+        <field name="inherit_id" ref="stock_account.stock_valuation_layer_tree"/>
+        <field name="arch" type="xml">
+            <!-- FIX: tree → list tag for Odoo 19 -->
+            <xpath expr="//list/field[@name='product_id']" position="after">
+                <field name="move_location_dest_id"/>
+                <field name="move_origin"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

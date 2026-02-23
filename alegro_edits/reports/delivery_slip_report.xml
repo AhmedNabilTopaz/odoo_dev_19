@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inherit Delivery Slip Report -->
+    <template id="report_delivery_document_inherit_allegro" inherit_id="stock.report_delivery_document">
+        <!-- Add driver and vehicle information after the operator field -->
+        <xpath expr="//div[@name='div_operator']" position="after">
+            <div t-if="o.driver_name" class="col col-3 mw-100 mb-2" name="div_driver_name">
+                <strong>Driver Name</strong>
+                <div t-field="o.driver_name" class="m-0"/>
+            </div>
+            <div t-if="o.car_number" class="col col-3 mw-100 mb-2" name="div_car_number">
+                <strong>Car Number</strong>
+                <div t-field="o.car_number" class="m-0"/>
+            </div>
+            <div t-if="o.national_number" class="col col-3 mw-100 mb-2" name="div_national_number">
+                <strong>National Number</strong>
+                <div t-field="o.national_number" class="m-0"/>
+            </div>
+        </xpath>
+    </template>
+</odoo>

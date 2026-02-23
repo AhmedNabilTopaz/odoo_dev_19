@@ -1,0 +1,34 @@
+<odoo>
+    <data>
+
+        <report
+                id="print_inv_current_stock_report_xlsx"
+                model="sale.order"
+                string="Inv Current Report"
+                report_type="xlsx"
+                name="inv_current_stock_report_xlsx"
+                file="inv_current_stock_report_xlsx"
+                attachment_use="False"
+                menu="False"/>
+         <report
+                id="print_sale_report_xlsx"
+                model="sale.order"
+                string="Sale Report"
+                report_type="xlsx"
+                name="sales_order_report_xlsx"
+                file="inv_current_stock_report_xlsx"
+                attachment_use="False"
+                menu="False"/>
+        <report
+                id="print_purchase_report_xlsx"
+                model="sale.order"
+                string="Purchase Report"
+                report_type="xlsx"
+                name="purchase_order_report_xlsx"
+                file="inv_current_stock_report_xlsx"
+                attachment_use="False"
+                menu="False"/>
+
+
+      </data>
+</odoo>

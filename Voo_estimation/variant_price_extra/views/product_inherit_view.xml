@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Easy Edit Variant View -->
+        <record id="wk_variant_price_extra_easy_edit"
+                model="ir.ui.view">
+            <field name="name">product.product.view.form.easy.inherit</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_variant_easy_edit_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//group[@name='pricing']" position="inside">
+
+                    <!-- Changed label to div with o_form_label class -->
+                    <div class="o_form_label">Final Variant Extra Price</div>
+
+                    <div class="o_row">
+                        <field name="attr_price_extra" readonly="1" class="oe_inline"/>
+                        <span class="mx-1">+</span>
+                        <field name="wk_extra_price" required="1" class="oe_inline"/>
+                        <span class="mx-1">=</span>
+                        <field name="price_extra" readonly="1" class="oe_inline"/>
+                    </div>
+
+                </xpath>
+
+            </field>
+        </record>
+
+        <!-- Full Variant Form View -->
+        <record id="wk_variant_price_extra"
+                model="ir.ui.view">
+            <field name="name">product.product.form.inherit</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='name']" position="after">
+                    <div class="o_form_label">Final Variant Extra Price</div>
+                    <div class="o_row">
+                        <field name="attr_price_extra" readonly="1" class="oe_inline"/>
+                        <span class="mx-1">+</span>
+                        <field name="wk_extra_price" required="1" class="oe_inline"/>
+                        <span class="mx-1">=</span>
+                        <field name="price_extra" readonly="1" class="oe_inline"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

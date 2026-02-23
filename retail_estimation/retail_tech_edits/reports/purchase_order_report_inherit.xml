@@ -1,0 +1,45 @@
+<odoo>
+  <template id="report_purchaseorder_document_custom" inherit_id="purchase.report_purchaseorder_document">
+
+    <!-- Add Date Requested next to Order Date -->
+    <xpath expr="//div[@id='informations']/div[@t-if=&quot;o.state in ['purchase','done'] and o.date_approve&quot;]" position="after">
+      <div t-if="o.order_line and o.order_line[0].date_planned" class="col-3 bm-2">
+        <strong>Date Requested:</strong>
+        <p t-field="o.order_line[0].date_planned" class="m-0"/>
+      </div>
+    </xpath>
+
+    <!-- Hide the "Date Req." column header -->
+    <xpath expr="//th[@name='th_date_req']" position="replace"/>
+
+    <!-- Hide the "Date Req." cell content -->
+    <xpath expr="//td[span[@t-field='line.date_planned']]" position="replace"/>
+
+    <!-- Add new column for Product Code (Header) -->
+    <xpath expr="//th[@name='th_description']" position="before">
+      <th class="text-center"><strong>Product Code</strong></th>
+    </xpath>
+
+    <!-- Replace Description column header with centered label -->
+    <xpath expr="//th[@name='th_description']" position="replace">
+      <th name="th_description" class="text-center"><strong>Product Name</strong></th>
+    </xpath>
+
+    <!-- Add new column for Product Code (Row content) -->
+    <xpath expr="//td[@id='product']" position="before">
+      <td class="text-center">
+        <t t-if="line.product_id.default_code">
+          <span t-esc="line.product_id.default_code"/>
+        </t>
+      </td>
+    </xpath>
+
+    <!-- Replace product column with just the product name -->
+    <xpath expr="//td[@id='product']" position="replace">
+      <td id="product" class="text-center">
+        <span t-field="line.name"/>
+      </td>
+    </xpath>
+
+  </template>
+</odoo>

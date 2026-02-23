@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_product_template_form_inherit_convert" model="ir.ui.view">
+        <field name="name">product.template.form.convert.variant</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_convert_variants_to_products"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-exchange"
+                        groups="base.group_system"
+                        invisible="product_variant_count &lt;= 1">
+                    <div class="o_stat_info">
+                        <span class="o_stat_text">Convert Variants</span>
+                    </div>
+                </button>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

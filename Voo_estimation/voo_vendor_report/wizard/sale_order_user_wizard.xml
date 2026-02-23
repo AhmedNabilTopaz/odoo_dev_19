@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="vendor_report_wizard" model="ir.ui.view">
+            <field name="name">vendor_report_wizard</field>
+            <field name="model">inv.current.report.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="product_filter" widget="radio"/>
+                            <field name="date_from"   attrs="{'invisible': [('product_filter','=', 'inv')]}"/>
+                            <field name="date_to" attrs="{'invisible': [('product_filter','=', 'inv')]}"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button string="print" class="oe_highlight" type="object"
+                                name="print_xlsx_report"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_vendor_report_wizard" model="ir.actions.act_window">
+            <field name="name">Custom Report</field>
+            <field name="res_model">inv.current.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="vendor_report_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+
+        <menuitem
+                id="root_menu_quantity_stock_report"
+                name="Custom Report"
+                sequence="100"
+                parent="stock.menu_stock_root"
+                groups="voo_vendor_report.inv_custom_report_group"/>
+
+        <menuitem
+                id="menu_quantity_stock_report"
+                name="Custom Report"
+                sequence="100"
+                parent="root_menu_quantity_stock_report"
+                action="action_vendor_report_wizard"
+                 groups="voo_vendor_report.inv_custom_report_group"/>
+
+        <!--        <menuitem-->
+        <!--                id="menu_agents_productivity_report"-->
+        <!--                name="Agents Productivity Details"-->
+        <!--                sequence="1000"-->
+        <!--                parent="root_menu_agents_productivity_sum_report"-->
+        <!--                action="action_sale_user_report_details_report_wizard"-->
+        <!--                groups="sales_team.group_sale_manager"/>-->
+
+
+    </data>
+</odoo>

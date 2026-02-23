@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+<!--        <record id="bill_reset_to_draft_group" model="res.groups">-->
+<!--            <field name="name">Reset TO Draft Button</field>-->
+<!--            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>-->
+<!--        </record>-->
+         <record model="res.groups" id="po_without_bill_group">
+            <field name="name">Approve to Receive PO without Bill</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+<!--            <field name="category_id"  ref="mix_promotions_managment"/>-->
+        </record>
+    </data>
+</odoo>

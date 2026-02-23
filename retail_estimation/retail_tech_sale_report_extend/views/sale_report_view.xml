@@ -1,0 +1,17 @@
+<odoo>
+    <record id="view_sale_report_tree_custom" model="ir.ui.view">
+        <field name="name">sale.report.tree.custom</field>
+        <field name="model">sale.report</field>
+        <field name="inherit_id" ref="sale.sale_report_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="inside">
+                <field name="categ_id"/>
+                <field name="product_uom_qty"/>
+                <field name="qty_delivered"/>
+                <field name="qty_invoiced"/>
+                <field name="pricelist_id"/>
+                <field name="invoice_status"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
