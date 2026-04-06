@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    Inherit the purchase order form
+    <record id="view_purchase_order_form_inherit_Topaz" model="ir.ui.view">
+        <field name="name">purchase.order.form.inherit.Topaz</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Locate the order_line tree inside the form -->
+            <!--            <xpath expr="//notebook/page[@name='products']/field[@name='order_line']/tree/fied[@name='taxes_id]" position="after">-->
+            <!--                <field name="sub_total_received"/>-->
+            <!--            </xpath>-->
+            <xpath expr="//field[@name='order_line']/list/field[@name='taxes_id']" position="after">
+                <field name="sub_total_received" optional="show"/>
+                <field name="product_barcode" optional="show"/>
+
+            </xpath>
+
+            <xpath expr="//field[@name='tax_totals']" position="after">
+                <field name="amount_received_tax" readonly="1"/>
+                <field name="amount_received_untaxed" readonly="1"/>
+                <field name="amount_received_total" readonly="1"/>
+            </xpath>
+
+
+        </field>
+    </record>
+
+    <record id="view_purchase_order_kpis_tree_inherit_received_total" model="ir.ui.view">
+        <field name="name">purchase.order.kpis.tree.inherit.received.total</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_kpis_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list/field[@name='origin']" position="after">
+                <field name="amount_received_total" widget="monetary" optional="show" sum="Total Received"/>
+                <field name="date_approve"/>
+                <field name="effective_date"/>
+
+            </xpath>
+
+        </field>
+    </record>
+</odoo>
