@@ -25,8 +25,8 @@
 
     # Data files
     'data': [
-        'views/sub_total_received_views.xml',
-        'views/stock_search_view.xml',
+        # 'views/sub_total_received_views.xml',
+        # 'views/stock_search_view.xml',
         'views/barcode_edits.xml',
     ],
 

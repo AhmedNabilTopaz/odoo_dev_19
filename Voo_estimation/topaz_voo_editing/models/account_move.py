@@ -275,35 +275,35 @@ class AccountMoveLine(models.Model):
         readonly=True,
     )
 
-    def test(self):
-        """Server action to fix account issues on selected journal entry lines."""
-        _logger.info("=== START Fix Account Issues Server Action ===")
-        moves = self.mapped('move_id')
-        fixed_count = 0
-        error_count = 0
-
-        for move in moves:
-            try:
-                move._fix_wrong_sales_accounts()
-                fixed_count += 1
-            except Exception as e:
-                _logger.error("ERROR processing move %s: %s", move.name, str(e))
-                error_count += 1
-
-        _logger.info("=== END: processed %s, errors %s ===", fixed_count, error_count)
-
-        message = (
-            f'Successfully fixed {fixed_count} journal entry(ies).'
-            if error_count == 0
-            else f'Processed {fixed_count} entry(ies), but {error_count} had errors. Check logs.'
-        )
-        return {
-            'type': 'ir.actions.client',
-            'tag': 'display_notification',
-            'params': {
-                'title': 'Account Fix Completed',
-                'message': message,
-                'type': 'success' if error_count == 0 else 'warning',
-                'sticky': False,
-            },
-        }
+    # def test(self):
+    #     """Server action to fix account issues on selected journal entry lines."""
+    #     _logger.info("=== START Fix Account Issues Server Action ===")
+    #     moves = self.mapped('move_id')
+    #     fixed_count = 0
+    #     error_count = 0
+    #
+    #     for move in moves:
+    #         try:
+    #             move._fix_wrong_sales_accounts()
+    #             fixed_count += 1
+    #         except Exception as e:
+    #             _logger.error("ERROR processing move %s: %s", move.name, str(e))
+    #             error_count += 1
+    #
+    #     _logger.info("=== END: processed %s, errors %s ===", fixed_count, error_count)
+    #
+    #     message = (
+    #         f'Successfully fixed {fixed_count} journal entry(ies).'
+    #         if error_count == 0
+    #         else f'Processed {fixed_count} entry(ies), but {error_count} had errors. Check logs.'
+    #     )
+    #     return {
+    #         'type': 'ir.actions.client',
+    #         'tag': 'display_notification',
+    #         'params': {
+    #             'title': 'Account Fix Completed',
+    #             'message': message,
+    #             'type': 'success' if error_count == 0 else 'warning',
+    #             'sticky': False,
+    #         },
+    #     }
