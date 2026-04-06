@@ -11,7 +11,7 @@
             <!--            <xpath expr="//notebook/page[@name='products']/field[@name='order_line']/tree/fied[@name='taxes_id]" position="after">-->
             <!--                <field name="sub_total_received"/>-->
             <!--            </xpath>-->
-            <xpath expr="//field[@name='order_line']/list/field[@name='taxes_id']" position="after">
+            <xpath expr="//field[@name='order_line']/list/field[@name='tax_ids']" position="after">
                 <field name="sub_total_received" optional="show"/>
                 <field name="product_barcode" optional="show"/>
 
