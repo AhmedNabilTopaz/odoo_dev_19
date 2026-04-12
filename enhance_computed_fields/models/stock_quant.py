@@ -5,25 +5,30 @@ class StockQuant(models.Model):
     _inherit = "stock.quant"
 
     barcode = fields.Char(
+                string='Barcode',
+
         compute='_compute_barcode',
         store=True,
     )
 
     product_tags = fields.Many2many(
-        'product.tag',
-        compute='_compute_product_tags',
+        comodel_name='product.tag',
+        string='Product Tags',
+        # compute='_compute_product_tags',
         store=True,
     )
 
     status_topaz = fields.Selection(
-        [('enabled', 'Enabled'), ('disabled', 'Disabled')],
+        selection=[('enabled', 'Enabled'), ('disabled', 'Disabled')],
+        string="Status",
         compute='_compute_status_topaz',
         store=True,
     )
 
     vendor_ids = fields.Many2many(
-        'res.partner',
-        compute='_compute_vendor_ids',
+         string="Vendors",
+        comodel_name='res.partner',
+        # compute='_compute_vendor_ids',
         store=True,
     )
 

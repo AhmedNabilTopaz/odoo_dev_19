@@ -5,7 +5,7 @@ class PurchaseOrderLine(models.Model):
 
     sub_total_received = fields.Monetary(
         string="SubTotal Received",
-        compute="_compute_amount_received",
+        # compute="_compute_amount_received",
         store=True,
         currency_field="currency_id",
     )
