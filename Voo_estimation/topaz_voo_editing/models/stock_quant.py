@@ -13,7 +13,7 @@ class StockQuant(models.Model):
     product_tags = fields.Many2many(
         comodel_name='product.tag',
         string='Product Tags',
-        compute='_compute_product_tags',
+        # compute='_compute_product_tags',
         store=True,
     )
     status_topaz = fields.Selection(
@@ -25,7 +25,7 @@ class StockQuant(models.Model):
     vendor_ids = fields.Many2many(
         comodel_name='res.partner',
         string="Vendors",
-        compute='_compute_vendor_ids',
+        # compute='_compute_vendor_ids', 
         store=True,
     )
 

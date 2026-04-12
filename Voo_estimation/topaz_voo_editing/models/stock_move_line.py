@@ -10,7 +10,7 @@ class StockMoveLine(models.Model):
     vendor_ids = fields.Many2many(
         comodel_name='res.partner',
         string="Vendors",
-        compute="_compute_vendor_ids",
+        # compute="_compute_vendor_ids",
         store=True,
         readonly=True,
     )

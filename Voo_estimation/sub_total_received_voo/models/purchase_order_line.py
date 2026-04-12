@@ -7,7 +7,7 @@ class PurchaseOrderLine(models.Model):
 
     sub_total_received = fields.Monetary(
         string="Subtotal Received",
-        compute="_compute_amount_received",
+        # compute="_compute_amount_received", 
         store=True,
         currency_field="currency_id",
     )
@@ -21,14 +21,14 @@ class PurchaseOrderLine(models.Model):
 
     price_tax_received = fields.Monetary(
         string="Tax Received",
-        compute="_compute_amount_received",
+        # compute="_compute_amount_received",
         store=True,
         currency_field="currency_id",
     )
 
     price_total_received = fields.Monetary(
         string="Total Received",
-        compute="_compute_amount_received",
+        # compute="_compute_amount_received",
         store=True,
         currency_field="currency_id",
     )

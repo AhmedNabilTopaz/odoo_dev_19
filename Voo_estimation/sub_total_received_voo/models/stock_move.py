@@ -9,7 +9,7 @@ class StockMove(models.Model):
         comodel_name="res.partner",
         string="Vendor",
         related="purchase_line_id.order_id.partner_id",
-        store=True,
+        store=False,
         index=True,
         readonly=True,
     )
@@ -22,7 +22,7 @@ class StockMoveLine(models.Model):
         comodel_name="res.partner",
         string="Vendor",
         related="move_id.vendor_id",
-        store=True,
+        store=False,
         index=True,
         readonly=True,
     )
