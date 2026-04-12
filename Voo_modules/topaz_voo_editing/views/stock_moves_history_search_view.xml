@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <data>
         <record id="search_stock_moves_history_view_edit_topaz" model="ir.ui.view">
             <field name="name">search.stock.moves.history.view.edit.topaz</field>
             <field name="model">stock.move.line</field>
@@ -11,5 +10,4 @@
                 </xpath>
             </field>
         </record>
-    </data>
 </odoo>

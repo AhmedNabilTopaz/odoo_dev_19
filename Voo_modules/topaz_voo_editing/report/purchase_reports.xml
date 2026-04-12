@@ -1,39 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
-        <report
-                id="action_report_purchase_order"
-                string="Quotation / Order"
-                model="purchase.order"
-                report_type="qweb-pdf"
-                file="purchase.report_purchaseorder"
-                name="purchase.report_purchaseorder"
-                print_report_name="(object.state in ('draft', 'sent') and 'Request for Quotation - %s' % (object.name) or
+    <report
+            id="action_report_purchase_order"
+            string="Quotation / Order"
+            model="purchase.order"
+            report_type="qweb-pdf"
+            file="purchase.report_purchaseorder"
+            name="purchase.report_purchaseorder"
+            print_report_name="(object.state in ('draft', 'sent') and 'Request for Quotation - %s' % (object.name) or
                 '%s - Purchase Order - %s - %s' % (object.partner_id.name,object.name,object.picking_type_id.name))"
-        />
+    />
 
-        <template id="report_purchaseorder_document_inherit_topaz_voo"
-                  inherit_id="purchase.report_purchaseorder_document">
-            <xpath expr="//table/thead/tr/th[1]" position="after">
-                <th name="th_barcode">
-                    <strong>Barcode</strong>
-                </th>
-            </xpath>
-            <xpath expr="//table/tbody/t[2]/tr/t/td[1]" position="after">
-                <td name="td_product_barcode" class="text-center">
-                    <img t-att-src="'/report/barcode/EAN13/'+line.product_id.product_tmpl_id.barcode"
-                         style="width:300x;height:50px" alt="Barcode"/>
+    <template id="report_purchaseorder_document_inherit_topaz_voo"
+              inherit_id="purchase.report_purchaseorder_document">
+        <xpath expr="//table/thead/tr/th[1]" position="after">
+            <th name="th_barcode">
+                <strong>Barcode</strong>
+            </th>
+        </xpath>
+        <xpath expr="//table/tbody/t[2]/tr/t/td[1]" position="after">
+            <td name="td_product_barcode" class="text-center">
+                <img t-att-src="'/report/barcode/EAN13/'+line.product_id.product_tmpl_id.barcode"
+                     style="width:300x;height:50px" alt="Barcode"/>
 
-                    <!--                    <img t-attf-src="'/report/barcode/EAN13/' + line.z_package_barcode" width="300" height="50"/>-->
-                    <!--                    <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('BARCODE', line.product_id.product_tmpl_id.barcode, 300, 50)"-->
-                    <!--                         class="float-right my-1"/>-->
-                    <!--                <span t-field="line.z_package_barcode" t-esc="o.ean13"/>-->
-                    <!--                    <div t-field="line.product_id.product_tmpl_id.barcode"-->
-                    <!--                         t-options="{'widget': 'barcode', 'symbology': 'EAN13', 'width': 300, 'height': 50, 'img_style': 'width:100%;height:35%;'}"/>-->
-                    <strong t-field="line.product_id.product_tmpl_id.barcode"/>
-                </td>
-            </xpath>
-        </template>
+                <!--                    <img t-attf-src="'/report/barcode/EAN13/' + line.z_package_barcode" width="300" height="50"/>-->
+                <!--                    <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('BARCODE', line.product_id.product_tmpl_id.barcode, 300, 50)"-->
+                <!--                         class="float-right my-1"/>-->
+                <!--                <span t-field="line.z_package_barcode" t-esc="o.ean13"/>-->
+                <!--                    <div t-field="line.product_id.product_tmpl_id.barcode"-->
+                <!--                         t-options="{'widget': 'barcode', 'symbology': 'EAN13', 'width': 300, 'height': 50, 'img_style': 'width:100%;height:35%;'}"/>-->
+                <strong t-field="line.product_id.product_tmpl_id.barcode"/>
+            </td>
+        </xpath>
+    </template>
 
-    </data>
 </odoo>

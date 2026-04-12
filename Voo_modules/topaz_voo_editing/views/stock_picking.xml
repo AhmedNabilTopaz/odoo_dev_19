@@ -1,72 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
-        <record id="view_picking_form_inherit_topaz" model="ir.ui.view">
-            <field name="name">view_picking_form_inherit_topaz</field>
-            <field name="model">stock.picking</field>
-            <field name="priority">1</field>
-            <field name="inherit_id" ref="stock.view_picking_form"/>
-            <field name="arch" type="xml">
-                <xpath expr="//header/button[@name='action_cancel']" position="after">
-                    <button name="delete_to_deleteline" string="Delete Selected Lines"
-                            type="object" class="oe_highlight" groups="base.group_user"/>
-                    <button name="select_all_todelete" string="Select All Lines to Delete"
-                            type="object" class="oe_highlight" groups="base.group_user"/>
-                </xpath>
+    <record id="view_picking_form_inherit_topaz" model="ir.ui.view">
+        <field name="name">view_picking_form_inherit_topaz</field>
+        <field name="model">stock.picking</field>
+        <field name="priority">1</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header/button[@name='action_cancel']" position="after">
+                <button name="delete_to_deleteline" string="Delete Selected Lines"
+                        type="object" class="oe_highlight" groups="base.group_user"/>
+                <button name="select_all_todelete" string="Select All Lines to Delete"
+                        type="object" class="oe_highlight" groups="base.group_user"/>
+            </xpath>
 
-                <xpath expr="//field[@name='backorder_id']" position="before">
-                    <field name="is_expense" invisible="1"/>
-                    <!-- FIX: attrs={} replaced with Odoo 19 inline expressions -->
-                    <field name="expense_location_id"
-                           invisible="not is_expense"
-                           required="is_expense"/>
-                </xpath>
+            <xpath expr="//field[@name='backorder_id']" position="before">
+                <field name="is_expense" invisible="1"/>
+                <!-- FIX: attrs={} replaced with Odoo 19 inline expressions -->
+                <field name="expense_location_id"
+                       invisible="not is_expense"
+                       required="is_expense"/>
+            </xpath>
 
-                <xpath expr="//field[@name='product_id']" position="before">
-                    <field name="to_delete"/>
-                </xpath>
+            <xpath expr="//field[@name='product_id']" position="before">
+                <field name="to_delete"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!--        <record id="view_stock_quant_tree_inventory_editable_inherit_topaz" model="ir.ui.view">-->
+    <!--            <field name="name">view_stock_quant_tree_inventory_editable_inherit_topaz</field>-->
+    <!--            <field name="model">stock.quant</field>-->
+    <!--            <field name="priority">1</field>-->
+    <!--            <field name="inherit_id" ref="stock.view_stock_quant_tree_inventory_editable"/>-->
+    <!--            <field name="arch" type="xml">-->
+    <!--                <xpath expr="//field[@name='lot_id']" position="after">-->
+    <!--                    <field name="barcode" optional="hidden"/>-->
+    <!--                    <field name="product_tags" optional="hidden"/>-->
+    <!--                </xpath>-->
+    <!--            </field>-->
+    <!--        </record>-->
+
+    <!--        <record id="quant_search_view_inherit_topaz" model="ir.ui.view">-->
+    <!--            <field name="name">quant_search_view_inherit_topaz</field>-->
+    <!--            <field name="model">stock.quant</field>-->
+    <!--            <field name="priority">1</field>-->
+    <!--            <field name="inherit_id" ref="stock.quant_search_view"/>-->
+    <!--            <field name="arch" type="xml">-->
+    <!--                <xpath expr="//search/group[2]" position="inside">-->
+    <!--                    <filter string='Barcode' name="barcodegroup" context="{'group_by': 'barcode'}"/>-->
+    <!--                    <filter string='Product Tags' name="product_tagsgroup" context="{'group_by': 'product_tags'}"/>-->
+    <!--                    <filter string="Status" name="status_topazgroup" context="{'group_by': 'status_topaz'}"/>-->
+    <!--                    <filter string="Vendor" name="vendorgroup" context="{'group_by': 'vendor_ids'}"/>-->
+    <!--                </xpath>-->
+    <!--            </field>-->
+    <!--        </record>-->
+
+    <record id="view_picking_form_rtn_notebook" model="ir.ui.view">
+        <field name="name">stock.picking.form.rtn.notebook</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <field name="origin" position="after">
+                <field name="show_po_field" invisible="1"/>
+                <!-- FIX: attrs={'invisible':[...]} → inline invisible expression -->
+                <field name="purchase_order_id" invisible="not show_po_field"/>
             </field>
-        </record>
-
-<!--        <record id="view_stock_quant_tree_inventory_editable_inherit_topaz" model="ir.ui.view">-->
-<!--            <field name="name">view_stock_quant_tree_inventory_editable_inherit_topaz</field>-->
-<!--            <field name="model">stock.quant</field>-->
-<!--            <field name="priority">1</field>-->
-<!--            <field name="inherit_id" ref="stock.view_stock_quant_tree_inventory_editable"/>-->
-<!--            <field name="arch" type="xml">-->
-<!--                <xpath expr="//field[@name='lot_id']" position="after">-->
-<!--                    <field name="barcode" optional="hidden"/>-->
-<!--                    <field name="product_tags" optional="hidden"/>-->
-<!--                </xpath>-->
-<!--            </field>-->
-<!--        </record>-->
-
-<!--        <record id="quant_search_view_inherit_topaz" model="ir.ui.view">-->
-<!--            <field name="name">quant_search_view_inherit_topaz</field>-->
-<!--            <field name="model">stock.quant</field>-->
-<!--            <field name="priority">1</field>-->
-<!--            <field name="inherit_id" ref="stock.quant_search_view"/>-->
-<!--            <field name="arch" type="xml">-->
-<!--                <xpath expr="//search/group[2]" position="inside">-->
-<!--                    <filter string='Barcode' name="barcodegroup" context="{'group_by': 'barcode'}"/>-->
-<!--                    <filter string='Product Tags' name="product_tagsgroup" context="{'group_by': 'product_tags'}"/>-->
-<!--                    <filter string="Status" name="status_topazgroup" context="{'group_by': 'status_topaz'}"/>-->
-<!--                    <filter string="Vendor" name="vendorgroup" context="{'group_by': 'vendor_ids'}"/>-->
-<!--                </xpath>-->
-<!--            </field>-->
-<!--        </record>-->
-
-        <record id="view_picking_form_rtn_notebook" model="ir.ui.view">
-            <field name="name">stock.picking.form.rtn.notebook</field>
-            <field name="model">stock.picking</field>
-            <field name="inherit_id" ref="stock.view_picking_form"/>
-            <field name="arch" type="xml">
-                <field name="origin" position="after">
-                    <field name="show_po_field" invisible="1"/>
-                    <!-- FIX: attrs={'invisible':[...]} → inline invisible expression -->
-                    <field name="purchase_order_id" invisible="not show_po_field"/>
-                </field>
-            </field>
-        </record>
-    </data>
+        </field>
+    </record>
 </odoo>

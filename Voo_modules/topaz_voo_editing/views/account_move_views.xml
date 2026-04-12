@@ -1,85 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
-        <record id="view_move_form_inherit_topaz" model="ir.ui.view">
-            <field name="name">view_move_form_inherit_topaz</field>
-            <field name="model">account.move</field>
-            <field name="priority">1</field>
-            <field name="inherit_id" ref="account.view_move_form"/>
-            <field name="arch" type="xml">
-                <xpath expr="//button[@name='button_draft']" position="replace">
-                    <field name="show_r_button" invisible="1"/>
-                    <!-- FIX: attrs={'invisible':[...]} → inline invisible expressions -->
-                    <button name="button_draft" string="Reset to Draft" type="object"
-                            groups="account.group_account_invoice"
-                            invisible="not show_r_button"
-                            data-hotkey="q"/>
-                    <button name="button_draft" string="Reset to Draft" type="object"
-                            invisible="move_type in ('out_invoice', 'out_refund')"
-                            groups="topaz_voo_editing.bill_reset_to_draft_group"
-                            data-hotkey="q"/>
-                </xpath>
-                <xpath expr="//field[@name='ref']" position="after">
-                    <field name="location_id"/>
-                    <field name="expense_location_id"/>
-                    <field name="picking_source_doc"/>
-                    <field name="notes"/>
-                </xpath>
-            </field>
-        </record>
+    <record id="view_move_form_inherit_topaz" model="ir.ui.view">
+        <field name="name">view_move_form_inherit_topaz</field>
+        <field name="model">account.move</field>
+        <field name="priority">1</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='button_draft']" position="replace">
+                <field name="show_r_button" invisible="1"/>
+                <!-- FIX: attrs={'invisible':[...]} → inline invisible expressions -->
+                <button name="button_draft" string="Reset to Draft" type="object"
+                        groups="account.group_account_invoice"
+                        invisible="not show_r_button"
+                        data-hotkey="q"/>
+                <button name="button_draft" string="Reset to Draft" type="object"
+                        invisible="move_type in ('out_invoice', 'out_refund')"
+                        groups="topaz_voo_editing.bill_reset_to_draft_group"
+                        data-hotkey="q"/>
+            </xpath>
+            <xpath expr="//field[@name='ref']" position="after">
+                <field name="location_id"/>
+                <field name="expense_location_id"/>
+                <field name="picking_source_doc"/>
+                <field name="notes"/>
+            </xpath>
+        </field>
+    </record>
 
-        <!-- FIX: view_move_tree → Odoo 19 uses list views; reference kept as is since
-             account.view_move_tree still exists but internally renders as list -->
-        <record id="view_move_tree_inherit_topaz" model="ir.ui.view">
-            <field name="name">view_move_tree_inherit_topaz</field>
-            <field name="model">account.move</field>
-            <field name="priority">1</field>
-            <field name="inherit_id" ref="account.view_move_tree"/>
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='name']" position="after">
-                    <field name="location_id" optional="show"/>
-                    <field name="expense_location_id" optional="show"/>
-                </xpath>
-            </field>
-        </record>
+    <!-- FIX: view_move_tree → Odoo 19 uses list views; reference kept as is since
+         account.view_move_tree still exists but internally renders as list -->
+    <record id="view_move_tree_inherit_topaz" model="ir.ui.view">
+        <field name="name">view_move_tree_inherit_topaz</field>
+        <field name="model">account.move</field>
+        <field name="priority">1</field>
+        <field name="inherit_id" ref="account.view_move_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="location_id" optional="show"/>
+                <field name="expense_location_id" optional="show"/>
+            </xpath>
+        </field>
+    </record>
 
-        <record id="view_move_line_tree_inherit_topaz" model="ir.ui.view">
-            <field name="name">view_move_line_tree_inherit_topaz</field>
-            <field name="model">account.move.line</field>
-            <field name="priority">1</field>
-            <field name="inherit_id" ref="account.view_move_line_tree"/>
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='credit']" position="after">
-                    <field name="location_id" optional="show"/>
-                    <field name="expense_location_id" optional="show"/>
-                </xpath>
-            </field>
-        </record>
+    <record id="view_move_line_tree_inherit_topaz" model="ir.ui.view">
+        <field name="name">view_move_line_tree_inherit_topaz</field>
+        <field name="model">account.move.line</field>
+        <field name="priority">1</field>
+        <field name="inherit_id" ref="account.view_move_line_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='credit']" position="after">
+                <field name="location_id" optional="show"/>
+                <field name="expense_location_id" optional="show"/>
+            </xpath>
+        </field>
+    </record>
 
-        <record id="view_in_invoice_bill_tree_inherit_topaz" model="ir.ui.view">
-            <field name="name">view_in_invoice_bill_tree_inherit_topaz</field>
-            <field name="model">account.move</field>
-            <field name="priority">1</field>
-            <field name="inherit_id" ref="account.view_invoice_tree"/>
-            <field name="arch" type="xml">
+    <record id="view_in_invoice_bill_tree_inherit_topaz" model="ir.ui.view">
+        <field name="name">view_in_invoice_bill_tree_inherit_topaz</field>
+        <field name="model">account.move</field>
+        <field name="priority">1</field>
+        <field name="inherit_id" ref="account.view_invoice_tree"/>
+        <field name="arch" type="xml">
 
-                <xpath expr="//field[@name='amount_total_in_currency_signed']" position="before">
-                    <field name="tax_14" sum="Total VAT" optional="show"/>
-                    <field name="table_rate" sum="Total Table Rate" optional="show"/>
-                    <field name="withholding_tax" sum="Total Withholding" optional="show"/>
-                </xpath>
+            <xpath expr="//field[@name='amount_total_in_currency_signed']" position="before">
+                <field name="tax_14" sum="Total VAT" optional="show"/>
+                <field name="table_rate" sum="Total Table Rate" optional="show"/>
+                <field name="withholding_tax" sum="Total Withholding" optional="show"/>
+            </xpath>
 
-            </field>
-        </record>
+        </field>
+    </record>
 
-        <record id="server_action_to_fix_account_issues" model="ir.actions.server">
-            <field name="name">Fix Account Issues</field>
-            <field name="model_id" ref="account.model_account_move_line"/>
-            <field name="state">code</field>
-            <field name="code">records.test()</field>
-            <field name="binding_model_id" ref="account.model_account_move_line"/>
-            <field name="binding_type">action</field>
-            <field name="binding_view_types">form,list</field>
-        </record>
-    </data>
+    <record id="server_action_to_fix_account_issues" model="ir.actions.server">
+        <field name="name">Fix Account Issues</field>
+        <field name="model_id" ref="account.model_account_move_line"/>
+        <field name="state">code</field>
+        <field name="code">records.test()</field>
+        <field name="binding_model_id" ref="account.model_account_move_line"/>
+        <field name="binding_type">action</field>
+        <field name="binding_view_types">form,list</field>
+    </record>
 </odoo>
