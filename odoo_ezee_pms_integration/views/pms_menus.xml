@@ -1,49 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <!-- ═══════════════════════════════════════
+         ACCOUNTING SUMMARY VIEWS
+    ════════════════════════════════════════ -->
+    <record id="ezee_daily_summary_tree" model="ir.ui.view">
+        <field name="name">ezee.daily.summary.tree</field>
+        <field name="model">account.move.line</field>
+        <field name="arch" type="xml">
+            <list string="Accounting Summary">
+                <field name="date"/>
+                <field name="account_id"/>
+                <field name="name"/>
+                <field name="debit"/>
+                <field name="credit"/>
+                <field name="balance"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_ezee_daily_summary" model="ir.actions.act_window">
+        <field name="name">Accounting Summary</field>
+        <field name="res_model">account.move.line</field>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="ezee_daily_summary_tree"/>
+        <field name="context">{'group_by': ['date:day', 'account_id']}</field>
+        <field name="limit">80</field>
+        <field name="target">current</field>
+        <field name="views" eval="[(ref('ezee_daily_summary_tree'), 'list')]"/>
+    </record>
+
+    <!-- ═══════════════════════════════════════
+         ROOT MENU
+         Only group_pms_integration_user needed here — manager implies user,
+         so both roles see this menu automatically.
+    ════════════════════════════════════════ -->
     <menuitem id="menu_pms_integration_root"
-              name="PMS Integration"
-              parent="account.menu_finance_configuration"
+              name="eZee Gateway"
+              parent="accountant.menu_accounting"
+              groups="odoo_ezee_pms_integration.group_pms_integration_user"
               sequence="100"/>
 
+    <!-- ═══════════════════════════════════════
+         MANAGER-ONLY MENUS (configuration / write operations)
+    ════════════════════════════════════════ -->
     <menuitem id="menu_pms_credentials"
-              name="PMS Credentials"
+              name="PMS Configuration"
               parent="menu_pms_integration_root"
               action="action_pms_credentials"
+              groups="odoo_ezee_pms_integration.group_pms_integration_manager"
               sequence="10"/>
-
-    <menuitem id="menu_pms_mapping_root"
-              name="Mappings"
-              parent="menu_pms_integration_root"
-              sequence="20"/>
 
     <menuitem id="menu_pms_account_mapping"
               name="Account Mapping"
-              parent="menu_pms_mapping_root"
+              parent="menu_pms_integration_root"
               action="action_pms_account_mapping"
-              sequence="10"/>
-
-   <menuitem id="menu_pms_tax_mapping"
-              name="Tax Mapping"
-              parent="menu_pms_mapping_root"
-              action="action_pms_tax_mapping"
+              groups="odoo_ezee_pms_integration.group_pms_integration_manager"
               sequence="20"/>
 
-<!--    <menuitem id="menu_pms_payment_mapping"-->
-<!--              name="Payment Mapping"-->
-<!--              parent="menu_pms_mapping_root"-->
-<!--              action="action_pms_payment_mapping"-->
-<!--              sequence="30"/>-->
-
-    <menuitem id="menu_pms_sync_log"
-              name="Sync Logs"
+    <menuitem id="menu_pms_tax_mapping"
+              name="Tax Mapping"
               parent="menu_pms_integration_root"
-              action="action_pms_sync_log"
-              sequence="40"/>
-              
+              action="action_pms_tax_mapping"
+              groups="odoo_ezee_pms_integration.group_pms_integration_manager"
+              sequence="30"/>
+
     <menuitem id="menu_pms_sync_wizard"
               name="Manual Sync"
               parent="menu_pms_integration_root"
               action="action_pms_sync_wizard"
+              groups="odoo_ezee_pms_integration.group_pms_integration_manager"
               sequence="100"/>
+
+    <!-- ═══════════════════════════════════════
+         USER + MANAGER MENUS (read-only views)
+    ════════════════════════════════════════ -->
+    <menuitem id="menu_pms_sync_log"
+              name="Sync Logs"
+              parent="menu_pms_integration_root"
+              action="action_pms_sync_log"
+              groups="odoo_ezee_pms_integration.group_pms_integration_user"
+              sequence="40"/>
+
+    <menuitem id="menu_ezee_daily_summary"
+              name="Accounting Summary"
+              parent="menu_pms_integration_root"
+              action="action_ezee_daily_summary"
+              groups="odoo_ezee_pms_integration.group_pms_integration_user"
+              sequence="50"/>
+
 </odoo>
-<!-- parent="account.menu_finance_entries" -->

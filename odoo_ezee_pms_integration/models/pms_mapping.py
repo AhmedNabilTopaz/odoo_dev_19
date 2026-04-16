@@ -4,7 +4,7 @@ class PMSAccountMapping(models.Model):
     _name = 'pms.account.mapping'
     _description = 'PMS Account Mapping'
 
-    # hotel_id = fields.Many2one('pms.credentials', string='Hotel', required=True)
+    hotel_id = fields.Many2one('pms.credentials', string='Hotel', required=True)
     # hotel_id_code=fields.Char(related='hotel_id.hotel_code', string='Hotel Code', readonly=True)
     # pms_account_id = fields.Char(string='Entity ID (descriptionunkid)', required=True)
     # pms_account_name = fields.Char(string='Entity (description)')
@@ -14,15 +14,16 @@ class PMSAccountMapping(models.Model):
     # pms_account_type_name = fields.Char(string='Sub Reference (descriptiontype)')
     account_group_id = fields.Many2one('account.group', string='Odoo Account Group')
     account_id = fields.Many2one('account.account', string='Odoo Account')
-
+    company_id = fields.Many2one('res.company', string='Company')
 class PMSTaxMapping(models.Model):
     _name = 'pms.tax.mapping'
     _description = 'PMS Tax Mapping'
 
-    # hotel_id = fields.Many2one('pms.credentials', string='Hotel', required=True)
+    hotel_id = fields.Many2one('pms.credentials', string='Hotel', required=True)
     pms_tax_id = fields.Char(string='PMS Tax ID', required=True)
     pms_tax_name = fields.Char(string='PMS Tax Name')
     tax_id = fields.Many2one('account.tax', string='Odoo Tax')
+    company_id = fields.Many2one('res.company', string='Company')
 
 class PMSPaymentMapping(models.Model):
     _name = 'pms.payment.mapping'

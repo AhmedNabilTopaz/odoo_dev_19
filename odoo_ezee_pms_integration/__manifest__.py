@@ -1,6 +1,6 @@
 {
-    'name': 'eZee Absolute PMS Integration',
-    'version': '1.0',
+    'name': 'eZee Absolute PMS Integration ',
+    'version': '1.1',
     'category': 'Accounting',
     'summary': 'Synchronize financial data from eZee Absolute PMS to Odoo Accounting',
     'description': """
@@ -15,6 +15,7 @@
     'author': 'WD-Group',
     'depends': ['base','account', 'analytic'],
     'data': [
+        'security/pms_groups.xml',
         'security/ir.model.access.csv',
         'data/ir_cron_data.xml',
         'data/demo_data.xml',
@@ -25,7 +26,9 @@
         'views/account_payment_views.xml',
         'wizards/pms_sync_wizard_views.xml',
         'views/pms_menus.xml',
-        'views/res_company_views.xml'
+        'views/res_company_views.xml',
+        # 'views/ezee_daily_summary_views.xml',
+
     ],
     'installable': True,
     'application': True,

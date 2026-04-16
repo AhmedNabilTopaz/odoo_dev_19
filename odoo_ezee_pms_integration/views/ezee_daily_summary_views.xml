@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- views/ezee_daily_summary_views.xml -->
+
+<odoo>
+
+  <!-- 1. Pivot view: rows = date, columns = account, values = debit/credit -->
+  <record id="view_ezee_daily_summary_pivot" model="ir.ui.view">
+    <field name="name">ezee.daily.summary.pivot</field>
+    <field name="model">account.move.line</field>
+    <field name="type">pivot</field>
+    <field name="arch" type="xml">
+      <pivot string="eZee Day to Day Summary" disable_linking="True">
+        <field name="date"       type="row"    interval="day"/>
+        <field name="account_id" type="row"/>
+        <field name="debit"      type="measure"/>
+        <field name="credit"     type="measure"/>
+        <field name="balance"    type="measure"/>
+      </pivot>
+    </field>
+  </record>
+
+  <!-- 2. Tree/list view: one line per date+account with totals -->
+  <record id="view_ezee_daily_summary_tree" model="ir.ui.view">
+    <field name="name">ezee.daily.summary.tree</field>
+    <field name="model">account.move.line</field>
+    <field name="type">list</field>
+    <field name="arch" type="xml">
+      <list string="eZee Day to Day Summary"
+            decoration-success="balance &gt; 0"
+            decoration-danger="balance &lt; 0"
+            default_group_by="date:day"
+            create="false" edit="false" delete="false">
+        <field name="date"       optional="show"/>
+        <field name="move_id"    string="Voucher Ref" optional="show"/>
+        <field name="account_id" optional="show"/>
+        <field name="name"       string="Description" optional="show"/>
+        <field name="debit"      sum="Total Debit"/>
+        <field name="credit"     sum="Total Credit"/>
+        <field name="balance"    sum="Net Balance"/>
+      </list>
+    </field>
+  </record>
+
+  <!-- 3. Search view with useful filters pre-built -->
+  <record id="view_ezee_daily_summary_search" model="ir.ui.view">
+    <field name="name">ezee.daily.summary.search</field>
+    <field name="model">account.move.line</field>
+    <field name="type">search</field>
+    <field name="arch" type="xml">
+      <search string="eZee Daily Summary">
+        <field name="date"/>
+        <field name="account_id"/>
+        <field name="move_id"/>
+
+        <!-- Quick filters -->
+        <!-- TO -->
+        <filter name="this_month"
+                string="This Month"
+                domain="[('date', '&gt;=', date_trunc('month', date))]"/>
+        <filter name="posted_only"
+                string="Posted Only"
+                domain="[('parent_state','=','posted')]"/>
+
+        <!-- Group by options -->
+        <group expand="1" string="Group By">
+          <filter name="group_by_date"    string="Date"    context="{'group_by': 'date:day'}"/>
+          <filter name="group_by_account" string="Account" context="{'group_by': 'account_id'}"/>
+        </group>
+      </search>
+    </field>
+  </record>
+
+  <!-- 4. Action: opens the page filtered to your eZee journal -->
+  <!--    Replace 'X' with the actual ID of your eZee journal   -->
+  <record id="action_ezee_daily_summary" model="ir.actions.act_window">
+    <field name="name">Day to Day Summary</field>
+    <field name="res_model">account.move.line</field>
+    <field name="view_mode">pivot,tree</field>
+    <field name="domain">[
+      ('journal_id.code', '=', 'EZEE'),
+      ('parent_state',    '=', 'posted')
+    ]</field>
+    <field name="context">{
+      'group_by':       ['date:day', 'account_id'],
+      'search_default_posted_only': 1
+    }</field>
+    <field name="view_ids" eval="[
+      (5,0,0),
+      (0,0,{'view_mode':'pivot', 'view_id': ref('view_ezee_daily_summary_pivot')}),
+      (0,0,{'view_mode':'list',  'view_id': ref('view_ezee_daily_summary_tree')})
+    ]"/>
+  </record>
+
+  <!-- 5. Menu item under Accounting > Reporting (or your custom menu) -->
+  <menuitem id="menu_ezee_daily_summary"
+            name="Day to Day Summary (eZee)"
+            parent="account.menu_finance_reports"
+            action="action_ezee_daily_summary"
+            sequence="99"/>
+
+</odoo>

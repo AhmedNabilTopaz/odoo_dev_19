@@ -6,7 +6,7 @@
         <field name="model">pms.account.mapping</field>
         <field name="arch" type="xml">
             <list editable="bottom">
-                <!-- <field name="hotel_id"/> -->
+                <field name="hotel_id"/>
                 <!-- <field name="hotel_id_code"/> -->
                 <!-- <field name="pms_account_name"/> -->
                 <!-- <field name="pms_account_id"/> -->
@@ -16,6 +16,7 @@
                 <field name="pms_account_header_id"/>
                 <field name="account_group_id"/>
                 <field name="account_id"/>
+                <field name="company_id"/>
             </list>
         </field>
     </record>
@@ -24,6 +25,8 @@
         <field name="name">Account Mapping</field>
         <field name="res_model">pms.account.mapping</field>
         <field name="view_mode">list</field>
+        <field name="domain">[('company_id', 'in', allowed_company_ids)]</field>
+        <field name="context">{'allowed_company_ids': allowed_company_ids}</field>
     </record>
 
     <!-- Tax Mapping -->
@@ -32,10 +35,11 @@
         <field name="model">pms.tax.mapping</field>
         <field name="arch" type="xml">
             <list editable="bottom">
-                <!-- <field name="hotel_id"/> -->
+                <field name="hotel_id"/>
                 <field name="pms_tax_id"/>
                 <field name="pms_tax_name"/>
                 <field name="tax_id"/>
+                <field name="company_id"/>
             </list>
         </field>
     </record>
@@ -44,6 +48,8 @@
         <field name="name">Tax Mapping</field>
         <field name="res_model">pms.tax.mapping</field>
         <field name="view_mode">list</field>
+                <field name="domain">[('company_id', 'in', allowed_company_ids)]</field>
+        <field name="context">{'allowed_company_ids': allowed_company_ids}</field>
     </record>
 
     <!-- Payment Mapping -->

@@ -14,7 +14,8 @@ class PMSSyncLog(models.Model):
         ('incidental', 'Incidental'),
         ('config', 'Configuration'),
     ], string='API Type')
-    sync_date = fields.Date(string='Sync Date')
+    sync_date = fields.Date(string='Sync Date From')
+    sync_date_to = fields.Date(string='Sync Date To')
     status = fields.Selection([
         ('success', 'Success'),
         ('failed', 'Failed'),

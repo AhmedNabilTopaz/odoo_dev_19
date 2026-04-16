@@ -15,13 +15,13 @@ class eZeeAPIService:
     def login(self):
         """Returns tuple (success: bool, message: str)"""
         xml_request = f"""<FAS_Interface_Request>
-<Request_Type>FAS_Login_User</Request_Type>
-<Authentication>
-<UserName>{self.creds.username}</UserName>
-<UserPassword>{self.creds.password}</UserPassword>
-<HotelCode>{self.creds.hotel_code}</HotelCode>
-</Authentication>
-</FAS_Interface_Request>"""
+                        <Request_Type>FAS_Login_User</Request_Type>
+                        <Authentication>
+                        <UserName>{self.creds.username}</UserName>
+                        <UserPassword>{self.creds.password}</UserPassword>
+                        <HotelCode>{self.creds.hotel_code}</HotelCode>
+                        </Authentication>
+                        </FAS_Interface_Request>"""
         
         try:
             response = requests.post(self.base_url_login, data=xml_request, headers={'Content-Type': 'application/xml'})
@@ -82,6 +82,7 @@ class eZeeAPIService:
                 'hotel_id': self.creds.id,
                 'api_type': api_type,
                 'sync_date': from_date,
+                'sync_date_to': to_date,
                 'status': 'success' if response.status_code == 200 else 'failed',
                 'request_payload': json.dumps(payload),
                 'response_payload': response.text,

@@ -1,7 +1,7 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_pms_credentials,pms.credentials,model_pms_credentials,account.group_account_manager,1,1,1,1
-access_pms_account_mapping,pms.account.mapping,model_pms_account_mapping,account.group_account_manager,1,1,1,1
-access_pms_tax_mapping,pms.tax.mapping,model_pms_tax_mapping,account.group_account_manager,1,1,1,1
-access_pms_payment_mapping,pms.payment.mapping,model_pms_payment_mapping,account.group_account_manager,1,1,1,1
-access_pms_sync_log,pms.sync.log,model_pms_sync_log,account.group_account_manager,1,1,1,1
-access_pms_sync_wizard,pms.sync.wizard,model_pms_sync_wizard,account.group_account_manager,1,1,1,1
+access_pms_credentials_manager,pms.credentials.manager,model_pms_credentials,odoo_ezee_pms_integration.group_pms_integration_manager,1,1,1,1
+access_pms_account_mapping_manager,pms.account.mapping.manager,model_pms_account_mapping,odoo_ezee_pms_integration.group_pms_integration_manager,1,1,1,1
+access_pms_tax_mapping_manager,pms.tax.mapping.manager,model_pms_tax_mapping,odoo_ezee_pms_integration.group_pms_integration_manager,1,1,1,1
+access_pms_payment_mapping_manager,pms.payment.mapping.manager,model_pms_payment_mapping,odoo_ezee_pms_integration.group_pms_integration_manager,1,1,1,1
+access_pms_sync_log_manager,pms.sync.log.manager,model_pms_sync_log,odoo_ezee_pms_integration.group_pms_integration_manager,1,1,1,1
+access_pms_sync_wizard_manager,pms.sync.wizard.manager,model_pms_sync_wizard,odoo_ezee_pms_integration.group_pms_integration_manager,1,1,1,1

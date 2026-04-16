@@ -1,0 +1,811 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* odoo_ezee_pms_integration
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-10 01:01+0000\n"
+"PO-Revision-Date: 2026-03-10 01:01+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: odoo_ezee_pms_integration
+#: model_terms:ir.ui.view,arch_db:odoo_ezee_pms_integration.view_pms_credentials_form
+msgid "API Credentials"
+msgstr "بيانات اعتماد API"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_sync_log__api_type
+msgid "API Type"
+msgstr "نوع API"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.actions.act_window,name:odoo_ezee_pms_integration.action_pms_account_mapping
+#: model:ir.ui.menu,name:odoo_ezee_pms_integration.menu_pms_account_mapping
+msgid "Account Mapping"
+msgstr "ربط الحسابات"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.actions.act_window,name:odoo_ezee_pms_integration.action_ezee_daily_summary
+#: model:ir.ui.menu,name:odoo_ezee_pms_integration.menu_ezee_daily_summary
+#: model_terms:ir.ui.view,arch_db:odoo_ezee_pms_integration.ezee_daily_summary_tree
+msgid "Accounting Summary"
+msgstr "ملخص المحاسبة"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_credentials__active
+msgid "Active"
+msgstr "نشط"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_bank_statement_line__ezee_address
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__ezee_address
+msgid "Address"
+msgstr "العنوان"
+
+#. module: odoo_ezee_pms_integration
+#: model_terms:ir.ui.view,arch_db:odoo_ezee_pms_integration.view_move_form_inherit_pms
+msgid "Address Information"
+msgstr "معلومات العنوان"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_bank_statement_line__ezee_address_line
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__ezee_address_line
+msgid "Address Line"
+msgstr "سطر العنوان"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_bank_statement_line__ezee_address1
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__ezee_address1
+msgid "Address Line 1"
+msgstr "سطر العنوان 1"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_bank_statement_line__ezee_address2
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__ezee_address2
+msgid "Address Line 2"
+msgstr "سطر العنوان 2"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_bank_statement_line__ezee_address3
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__ezee_address3
+msgid "Address Line 3"
+msgstr "سطر العنوان 3"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_bank_statement_line__ezee_amount
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__ezee_amount
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_payment__ezee_amount
+msgid "Amount"
+msgstr "المبلغ"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_credentials__analytic_account_id
+msgid "Analytic Account"
+msgstr "الحساب التحليلي"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_credentials__auth_code
+msgid "Auth Code"
+msgstr "رمز المصادقة"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_bank_statement_line__ezee_bill_no
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__ezee_bill_no
+msgid "Bill Number"
+msgstr "رقم الفاتورة"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_bank_statement_line__ezee_bill_name
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__ezee_bill_name
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_payment__ezee_bill_name
+msgid "Bill To Name"
+msgstr "اسم المُفوتَر إليه"
+
+#. module: odoo_ezee_pms_integration
+#: model_terms:ir.ui.view,arch_db:odoo_ezee_pms_integration.view_move_form_inherit_pms
+msgid "Bill and Voucher Information"
+msgstr "معلومات الفاتورة والقسيمة"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_bank_statement_line__bussiness_source_name
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__bussiness_source_name
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_payment__bussiness_source_name
+msgid "Business Source"
+msgstr "مصدر الأعمال"
+
+#. module: odoo_ezee_pms_integration
+#: model_terms:ir.ui.view,arch_db:odoo_ezee_pms_integration.view_pms_sync_wizard_form
+msgid "Cancel"
+msgstr "إلغاء"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_bank_statement_line__ezee_tax_number
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__ezee_tax_number
+msgid "Card Number"
+msgstr "رقم البطاقة"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_bank_statement_line__ezee_checkin_date
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__ezee_checkin_date
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_payment__ezee_checkin_date
+msgid "Check-In Date"
+msgstr "تاريخ تسجيل الوصول"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_bank_statement_line__ezee_checkout_date
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__ezee_checkout_date
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_payment__ezee_checkout_date
+msgid "Check-Out Date"
+msgstr "تاريخ تسجيل المغادرة"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model,name:odoo_ezee_pms_integration.model_res_company
+msgid "Companies"
+msgstr "الشركات"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_credentials__company_id
+msgid "Company"
+msgstr "الشركة"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields.selection,name:odoo_ezee_pms_integration.selection__pms_sync_log__api_type__config
+msgid "Configuration"
+msgstr "الإعداد"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_bank_statement_line__ezee_country
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__ezee_country
+msgid "Country"
+msgstr "الدولة"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_account_mapping__create_uid
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_credentials__create_uid
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_payment_mapping__create_uid
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_sync_log__create_uid
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_sync_wizard__create_uid
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_tax_mapping__create_uid
+msgid "Created by"
+msgstr "أُنشئ بواسطة"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_account_mapping__create_date
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_credentials__create_date
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_payment_mapping__create_date
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_sync_log__create_date
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_sync_wizard__create_date
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_tax_mapping__create_date
+msgid "Created on"
+msgstr "تاريخ الإنشاء"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_payment__ezee_credit_number
+msgid "Credit Number"
+msgstr "رقم الائتمان"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_credentials__currency_code
+msgid "Currency Code"
+msgstr "رمز العملة"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_credentials__journal_id
+msgid "Default Journal"
+msgstr "دفتر الحسابات غير المصنفة"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_credentials__debt_transfer_journal_id
+msgid "Debt Transfer Journal"
+msgstr "القيود العامة"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__display_name
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_payment__display_name
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_account_mapping__display_name
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_credentials__display_name
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_payment_mapping__display_name
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_sync_log__display_name
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_sync_wizard__display_name
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_tax_mapping__display_name
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_res_company__display_name
+msgid "Display Name"
+msgstr "اسم العرض"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_bank_statement_line__ezee_email
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__ezee_email
+msgid "Email Address"
+msgstr "البريد الإلكتروني"
+
+#. module: odoo_ezee_pms_integration
+#: model_terms:ir.ui.view,arch_db:odoo_ezee_pms_integration.view_pms_sync_log_form
+msgid "Error"
+msgstr "خطأ"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_sync_log__error_message
+msgid "Error Message"
+msgstr "رسالة الخطأ"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_bank_statement_line__ezee_id
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__ezee_id
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_payment__ezee_id
+msgid "Ezee ID"
+msgstr "معرّف Ezee"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields.selection,name:odoo_ezee_pms_integration.selection__pms_sync_log__status__failed
+msgid "Failed"
+msgstr "فشل"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_bank_statement_line__ezee_folio_number
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__ezee_folio_number
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_payment__ezee_folio_number
+#: model_terms:ir.ui.view,arch_db:odoo_ezee_pms_integration.view_move_form_inherit_pms
+msgid "Folio Number"
+msgstr "رقم الفوليو"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_sync_wizard__from_date
+msgid "From Date"
+msgstr "من تاريخ"
+
+#. module: odoo_ezee_pms_integration
+#: model_terms:ir.ui.view,arch_db:odoo_ezee_pms_integration.view_move_form_inherit_pms
+msgid "Guest Information"
+msgstr "معلومات النزيل"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_bank_statement_line__ezee_guest_name
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__ezee_guest_name
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_payment__ezee_guest_name
+msgid "Guest Name"
+msgstr "اسم النزيل"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_payment_mapping__hotel_id
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_sync_log__hotel_id
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_tax_mapping__hotel_id
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_res_company__hotel_id
+#: model_terms:ir.ui.view,arch_db:odoo_ezee_pms_integration.view_move_form_inherit_pms
+msgid "Hotel"
+msgstr "الفندق"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_credentials__hotel_code
+msgid "Hotel Code"
+msgstr "كود الفندق"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_credentials__name
+msgid "Hotel Name"
+msgstr "اسم الفندق"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_sync_wizard__hotel_ids
+#: model_terms:ir.ui.view,arch_db:odoo_ezee_pms_integration.view_pms_sync_wizard_form
+msgid "Hotels"
+msgstr "الفنادق"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__id
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_payment__id
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_account_mapping__id
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_credentials__id
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_payment_mapping__id
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_sync_log__id
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_sync_wizard__id
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_tax_mapping__id
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_res_company__id
+msgid "ID"
+msgstr "المُعرف"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_bank_statement_line__ezee_company_tax_id
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__ezee_company_tax_id
+msgid "Identity Card Type"
+msgstr "نوع بطاقة الهوية"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields.selection,name:odoo_ezee_pms_integration.selection__pms_sync_log__api_type__incidental
+msgid "Incidental"
+msgstr "مصاريف متفرقة"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_payment__ezee_invoice_no
+msgid "Invoice Number"
+msgstr "رقم الفاتورة"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_bank_statement_line__is_sale_installed
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__is_sale_installed
+msgid "Is Sale Installed"
+msgstr "تم تثبيت المبيعات"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields.selection,name:odoo_ezee_pms_integration.selection__pms_sync_log__api_type__journal
+msgid "Journal"
+msgstr "اليومية"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model,name:odoo_ezee_pms_integration.model_account_move
+msgid "Journal Entry"
+msgstr "قيد اليومية"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_account_mapping__write_uid
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_credentials__write_uid
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_payment_mapping__write_uid
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_sync_log__write_uid
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_sync_wizard__write_uid
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_tax_mapping__write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_account_mapping__write_date
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_credentials__write_date
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_payment_mapping__write_date
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_sync_log__write_date
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_sync_wizard__write_date
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_tax_mapping__write_date
+msgid "Last Updated on"
+msgstr "تاريخ آخر تحديث"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.ui.menu,name:odoo_ezee_pms_integration.menu_pms_sync_wizard
+msgid "Manual Sync"
+msgstr "مزامنة يدوية"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_bank_statement_line__ezee_market
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__ezee_market
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_payment__market
+msgid "Market"
+msgstr "السوق"
+
+#. module: odoo_ezee_pms_integration
+#: model_terms:ir.ui.view,arch_db:odoo_ezee_pms_integration.view_move_form_inherit_pms
+msgid "Marketing Information"
+msgstr "معلومات التسويق"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_bank_statement_line__ezee_number_of_nights
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__ezee_number_of_nights
+msgid "Number of Nights"
+msgstr "عدد الليالي"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_bank_statement_line__ezee_booking_no
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__ezee_booking_no
+msgid "OTA  Reference)"
+msgstr "مرجع OTA"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_payment__ezee_voucher_number
+msgid "OTA Voucher Number"
+msgstr "رقم قسيمة OTA"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_account_mapping__account_id
+msgid "Odoo Account"
+msgstr "حساب أودو"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_account_mapping__account_group_id
+msgid "Odoo Account Group"
+msgstr "مجموعة حسابات أودو"
+
+#. module: odoo_ezee_pms_integration
+#: model_terms:ir.ui.view,arch_db:odoo_ezee_pms_integration.view_pms_credentials_form
+msgid "Odoo Configuration"
+msgstr "إعدادات أودو"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_payment_mapping__journal_id
+msgid "Odoo Journal"
+msgstr "يومية أودو"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_tax_mapping__tax_id
+msgid "Odoo Tax"
+msgstr "ضريبة أودو"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model,name:odoo_ezee_pms_integration.model_pms_account_mapping
+msgid "PMS Account Mapping"
+msgstr "ربط حسابات PMS"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.actions.act_window,name:odoo_ezee_pms_integration.action_pms_credentials
+#: model:ir.ui.menu,name:odoo_ezee_pms_integration.menu_pms_credentials
+msgid "PMS Configuration"
+msgstr "إعدادات PMS"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model,name:odoo_ezee_pms_integration.model_pms_credentials
+msgid "PMS Credentials"
+msgstr "بيانات اعتماد PMS"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_bank_statement_line__pms_hotel_id
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__pms_hotel_id
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_payment__pms_hotel_id
+msgid "PMS Hotel"
+msgstr "فندق PMS"
+
+#. module: odoo_ezee_pms_integration
+#: model_terms:ir.ui.view,arch_db:odoo_ezee_pms_integration.view_payment_form_inherit_pms
+msgid "PMS Integration"
+msgstr "تكامل PMS"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.actions.act_window,name:odoo_ezee_pms_integration.action_pms_sync_wizard
+msgid "PMS Manual Sync"
+msgstr "المزامنة اليدوية لـ PMS"
+
+#. module: odoo_ezee_pms_integration
+#: model_terms:ir.ui.view,arch_db:odoo_ezee_pms_integration.view_pms_credentials_form
+msgid "PMS Metadata"
+msgstr "بيانات تعريفية لـ PMS"
+
+#. module: odoo_ezee_pms_integration
+#: model_terms:ir.ui.view,arch_db:odoo_ezee_pms_integration.view_payment_form_inherit_pms
+msgid "PMS Payment"
+msgstr "دفعة PMS"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_payment_mapping__pms_payment_id
+msgid "PMS Payment ID"
+msgstr "معرّف دفعة PMS"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model,name:odoo_ezee_pms_integration.model_pms_payment_mapping
+msgid "PMS Payment Method Mapping"
+msgstr "ربط طرق الدفع لـ PMS"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_payment_mapping__pms_payment_type
+msgid "PMS Payment Type"
+msgstr "نوع دفعة PMS"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_bank_statement_line__pms_reference
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__pms_reference
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_payment__pms_reference
+msgid "PMS Reference"
+msgstr "مرجع PMS"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model,name:odoo_ezee_pms_integration.model_pms_sync_log
+msgid "PMS Sync Log"
+msgstr "سجل مزامنة PMS"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model,name:odoo_ezee_pms_integration.model_pms_sync_wizard
+msgid "PMS Sync Wizard"
+msgstr "معالج مزامنة PMS"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_tax_mapping__pms_tax_id
+msgid "PMS Tax ID"
+msgstr "معرّف ضريبة PMS"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model,name:odoo_ezee_pms_integration.model_pms_tax_mapping
+msgid "PMS Tax Mapping"
+msgstr "ربط ضرائب PMS"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_tax_mapping__pms_tax_name
+msgid "PMS Tax Name"
+msgstr "اسم ضريبة PMS"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_bank_statement_line__pms_tran_id
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__pms_tran_id
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_payment__pms_tran_id
+msgid "PMS Transaction ID"
+msgstr "معرّف معاملة PMS"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields.selection,name:odoo_ezee_pms_integration.selection__pms_sync_log__status__partial
+msgid "Partial"
+msgstr "جزئي"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_credentials__password
+msgid "Password"
+msgstr "كلمة المرور"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields.selection,name:odoo_ezee_pms_integration.selection__pms_sync_log__api_type__payment
+msgid "Payment"
+msgstr "الدفع"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model,name:odoo_ezee_pms_integration.model_account_payment
+msgid "Payments"
+msgstr "الدفعات"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_bank_statement_line__ezee_address_line2
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__ezee_address_line2
+msgid "Phone Number"
+msgstr "رقم الهاتف"
+
+#. module: odoo_ezee_pms_integration
+#: model_terms:ir.ui.view,arch_db:odoo_ezee_pms_integration.view_pms_credentials_form
+msgid "Pull Master Data"
+msgstr "سحب البيانات الرئيسية"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_bank_statement_line__ezee_rate_plan
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__ezee_rate_plan
+msgid "Rate Plan"
+msgstr "خطة الأسعار"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_bank_statement_line__ezee_rate_type
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__ezee_rate_type
+msgid "Rate Type"
+msgstr "نوع السعر"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields.selection,name:odoo_ezee_pms_integration.selection__pms_sync_log__api_type__receipt
+msgid "Receipt"
+msgstr "الإيصال"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_bank_statement_line__ezee_receipt_no
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__ezee_receipt_no
+msgid "Receipt No"
+msgstr "رقم الإيصال"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_payment__ezee_receipt_no
+msgid "Receipt Number"
+msgstr "رقم الإيصال"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_account_mapping__pms_account_header_name
+msgid "Reference (header)"
+msgstr "المرجع (الرأسية)"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_account_mapping__pms_account_header_id
+msgid "Reference ID(headerid)"
+msgstr "معرّف المرجع (الرأسية)"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_bank_statement_line__ezee_registration_no
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__ezee_registration_no
+msgid "Registration No."
+msgstr "رقم التسجيل"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_bank_statement_line__ezee_remark
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__ezee_remark
+msgid "Remark"
+msgstr "ملاحظة"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_payment__remarks
+msgid "Remarks"
+msgstr "ملاحظات"
+
+#. module: odoo_ezee_pms_integration
+#: model_terms:ir.ui.view,arch_db:odoo_ezee_pms_integration.view_pms_sync_log_form
+msgid "Request"
+msgstr "الطلب"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_sync_log__request_payload
+msgid "Request Payload"
+msgstr "بيانات الطلب"
+
+#. module: odoo_ezee_pms_integration
+#: model_terms:ir.ui.view,arch_db:odoo_ezee_pms_integration.view_move_form_inherit_pms
+msgid "Reservation Details"
+msgstr "تفاصيل الحجز"
+
+#. module: odoo_ezee_pms_integration
+#: model_terms:ir.ui.view,arch_db:odoo_ezee_pms_integration.view_payment_form_inherit_pms
+msgid "Reservation Information"
+msgstr "معلومات الحجز"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_bank_statement_line__ezee_reservation_number
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__ezee_reservation_number
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_payment__ezee_reservation_number
+#: model_terms:ir.ui.view,arch_db:odoo_ezee_pms_integration.view_move_form_inherit_pms
+msgid "Reservation Number"
+msgstr "رقم الحجز"
+
+#. module: odoo_ezee_pms_integration
+#: model_terms:ir.ui.view,arch_db:odoo_ezee_pms_integration.view_pms_sync_log_form
+msgid "Response"
+msgstr "الاستجابة"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_sync_log__response_payload
+msgid "Response Payload"
+msgstr "بيانات الاستجابة"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_bank_statement_line__ezee_room_number
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__ezee_room_number
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_payment__ezee_room_number
+msgid "Room Number"
+msgstr "رقم الغرفة"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_bank_statement_line__ezee_type
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__ezee_type
+msgid "Room Type"
+msgstr "نوع الغرفة"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields.selection,name:odoo_ezee_pms_integration.selection__pms_sync_log__api_type__sales
+msgid "Sales"
+msgstr "المبيعات"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.actions.server,name:odoo_ezee_pms_integration.ir_cron_pms_sync_all_ir_actions_server
+msgid "Scheduled Reconcile"
+msgstr "تسوية مجدولة"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_bank_statement_line__ezee_source
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__ezee_source
+msgid "Source"
+msgstr "المصدر"
+
+#. module: odoo_ezee_pms_integration
+#: model_terms:ir.ui.view,arch_db:odoo_ezee_pms_integration.view_pms_sync_wizard_form
+msgid "Start Sync"
+msgstr "بدء المزامنة"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_sync_log__status
+msgid "Status"
+msgstr "الحالة"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields.selection,name:odoo_ezee_pms_integration.selection__pms_sync_log__status__success
+msgid "Success"
+msgstr "نجاح"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_sync_log__sync_date
+msgid "Sync Date From"
+msgstr "تاريخ المزامنة من"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_sync_log__sync_date_to
+msgid "Sync Date To"
+msgstr "تاريخ المزامنة إلى"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_sync_wizard__sync_incidentals
+msgid "Sync Incidentals"
+msgstr "مزامنة المصاريف المتفرقة"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_sync_wizard__sync_journals
+msgid "Sync Journals"
+msgstr "مزامنة اليوميات"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.actions.act_window,name:odoo_ezee_pms_integration.action_pms_sync_log
+#: model:ir.ui.menu,name:odoo_ezee_pms_integration.menu_pms_sync_log
+msgid "Sync Logs"
+msgstr "سجلات المزامنة"
+
+#. module: odoo_ezee_pms_integration
+#: model_terms:ir.ui.view,arch_db:odoo_ezee_pms_integration.view_pms_sync_wizard_form
+msgid "Sync Options"
+msgstr "خيارات المزامنة"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_sync_wizard__sync_payments
+msgid "Sync Payments"
+msgstr "مزامنة الدفعات"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_sync_wizard__sync_receipts
+msgid "Sync Receipts"
+msgstr "مزامنة الإيصالات"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_sync_wizard__sync_sales
+msgid "Sync Sales"
+msgstr "مزامنة المبيعات"
+
+#. module: odoo_ezee_pms_integration
+#: model_terms:ir.ui.view,arch_db:odoo_ezee_pms_integration.view_pms_sync_log_tree
+msgid "Sync Time"
+msgstr "وقت المزامنة"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.actions.act_window,name:odoo_ezee_pms_integration.action_pms_tax_mapping
+#: model:ir.ui.menu,name:odoo_ezee_pms_integration.menu_pms_tax_mapping
+msgid "Tax Mapping"
+msgstr "ربط الضرائب"
+
+#. module: odoo_ezee_pms_integration
+#: model_terms:ir.ui.view,arch_db:odoo_ezee_pms_integration.view_pms_credentials_form
+msgid "Test Connection"
+msgstr "اختبار الاتصال"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_sync_wizard__to_date
+msgid "To Date"
+msgstr "إلى تاريخ"
+
+#. module: odoo_ezee_pms_integration
+#: model_terms:ir.ui.view,arch_db:odoo_ezee_pms_integration.view_move_form_inherit_pms
+msgid "Transaction ID"
+msgstr "معرّف المعاملة"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_credentials__username
+msgid "Username"
+msgstr "اسم المستخدم"
+
+#. module: odoo_ezee_pms_integration
+#: model_terms:ir.ui.view,arch_db:odoo_ezee_pms_integration.view_payment_form_inherit_pms
+msgid "Voucher & Credit"
+msgstr "القسيمة والائتمان"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_bank_statement_line__ezee_voucher_name
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__ezee_voucher_name
+msgid "Voucher Name"
+msgstr "اسم القسيمة"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_bank_statement_line__ezee_voucher_no
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_move__ezee_voucher_no
+msgid "Voucher Number"
+msgstr "رقم القسيمة"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_payment__ezee_voucher_type
+msgid "Voucher Type"
+msgstr "نوع القسيمة"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_pms_credentials__working_date
+msgid "Working Date"
+msgstr "تاريخ العمل"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.ui.menu,name:odoo_ezee_pms_integration.menu_pms_integration_root
+msgid "eZee Gateway"
+msgstr "بوابة eZee"
+
+#. module: odoo_ezee_pms_integration
+#: model_terms:ir.ui.view,arch_db:odoo_ezee_pms_integration.view_move_form_inherit_pms
+msgid "eZee Info"
+msgstr "معلومات eZee"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_payment__ezee_payment_method
+msgid "eZee Payment Method"
+msgstr "طريقة الدفع عبر eZee"
+
+#. module: odoo_ezee_pms_integration
+#: model:ir.model.fields,field_description:odoo_ezee_pms_integration.field_account_payment__ezee_type
+msgid "eZee Payment Type"
+msgstr "نوع الدفع عبر eZee"

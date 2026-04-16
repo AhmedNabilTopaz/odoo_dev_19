@@ -6,14 +6,42 @@
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_move_form"/>
         <field name="arch" type="xml">
+            <!-- Make delivery date and due date invisible -->
+             <xpath expr="//field[@name='delivery_date']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//sheet/group[1]/group[2]/div[1]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//sheet/group[1]/group[2]/div[2]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='partner_id' and @widget='res_partner_many2one']" position="attributes">
+                <attribute name="context">{
+                    'res_partner_search_mode': (context.get('default_move_type', 'entry') in ('out_invoice', 'out_refund', 'out_receipt') and 'customer') or (context.get('default_move_type', 'entry') in ('in_invoice', 'in_refund', 'in_receipt') and 'supplier') or False,
+                    'show_address': 0, 'default_is_company': True, 'show_vat': True}</attribute>
+            </xpath>
+            <xpath expr="//div[field[@name='partner_id' and @widget='res_partner_many2one']]" position="after">
+                <label for="partner_postal_address"
+                       string="Address"
+                       invisible="not partner_id or move_type not in ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt')"/>
+                <div invisible="not partner_id or move_type not in ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt')">
+                    <field name="partner_postal_address"
+                           nolabel="1"
+                           readonly="1"
+                           widget="text"/>
+                </div>
+            </xpath>
+            
             <!-- Add PMS fields in the header after the name field -->
             <xpath expr="//notebook" position="before">
                 <group>
+                    <!-- <button name="cron_apply_outstanding_credits" type="object" string="Get Outstanding" /> -->
                     <label for="pms_hotel_id" string="Hotel"/>
                     <field name="pms_hotel_id" readonly="1" nolabel="1"/>
                     <label for="pms_tran_id" string="Transaction ID"/>
                     <field name="pms_tran_id" readonly="1" nolabel="1"/>
-                    <label for="pms_reference" string="Reference"/>
+                    <label for="pms_reference" string="Reservation Number"/>
                     <field name="pms_reference" readonly="1" nolabel="1"/>
                     <label for="ezee_folio_number" string="Folio Number"/>
                     <field name="ezee_folio_number" readonly="1" nolabel="1"/>
@@ -25,22 +53,54 @@
                 <page string="eZee Info" name="ezee_info" invisible="not pms_tran_id">
                     <group>
                         <group string="Guest Information">
-                            <field name="ezee_id"/>
+                            <!-- <field name="ezee_id"/> -->
                             <field name="ezee_guest_name"/>
-                            <field name="ezee_reservation_number"/>
-                            <field name="ezee_folio_number"/>
+                            <field name="ezee_company_tax_id"/>
+                            <field name="ezee_tax_number"/>
+                            <field name="ezee_address_line2"/>
+                            <field name="ezee_email"/>
+                            <field name="ezee_source"/>
+                            <!-- <field name="ezee_reservation_number"/>
+                            <field name="ezee_folio_number"/> -->
                         </group>
                         <group string="Reservation Details">
-                            <field name="ezee_type"/>
-                            <field name="ezee_room_number"/>
                             <field name="ezee_checkin_date"/>
                             <field name="ezee_checkout_date"/>
+                            <field name="ezee_type"/>
+                            <field name="ezee_room_number"/>
+                            <field name="ezee_rate_type"/>
+                            <field name="ezee_rate_plan"/>
+
                         </group>
                     </group>
                     <group>
-                        <group string="Transaction Details">
+                        <group string="Bill and Voucher Information">
+                            <field name="ezee_bill_no"/>
+                            <field name="ezee_bill_name"/>
+                            <field name="ezee_voucher_no"/>
+                            <field name="ezee_voucher_name"/>
+                        </group>
+                        <!-- <group string="Transaction and Rate Details">
                             <field name="ezee_receipt_no"/>
                             <field name="ezee_amount"/>
+
+                            <field name="ezee_market"/>
+                        </group> -->
+                         <group string="Marketing Information">
+                            <field name='bussiness_source_name'/>
+                            <field name="ezee_registration_no"/>
+                            <field name="ezee_booking_no"/>
+                            <field name="ezee_market"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Address Information">
+                            <field name="ezee_country"/>
+                            <field name="ezee_address"/>
+                            <!-- <field name="ezee_address_line"/> -->
+                            <field name="ezee_address1"/>
+                            <field name="ezee_address2"/>
+                            <field name="ezee_address3"/>
                         </group>
                     </group>
                 </page>

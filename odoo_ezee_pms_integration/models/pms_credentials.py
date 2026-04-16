@@ -10,12 +10,12 @@ class PMSCredentials(models.Model):
     password = fields.Char(string='Password', required=True, password=True)
     auth_code = fields.Char(string='Auth Code', readonly=True)
     working_date = fields.Date(string='Working Date', readonly=True)
-    currency_code = fields.Char(string='Currency Code', readonly=True)
+    currency_code = fields.Char(string='Default Currency', readonly=True)
     
-    journal_id = fields.Many2one('account.journal', string='Default Journal')
+    journal_id = fields.Many2one('account.journal', string='Fallback Journal')
     analytic_account_id = fields.Many2one('account.analytic.account', string='Analytic Account')
     company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.company)
-
+    debt_transfer_journal_id = fields.Many2one('account.journal', string='Debt Transfer Journal')
     active = fields.Boolean(default=True)
 
     def action_test_connection(self):
@@ -56,7 +56,12 @@ class PMSCredentials(models.Model):
         yesterday = Date.today() - timedelta(days=1)
         
         for hotel in self:
-            wizard = self.env['pms.sync.wizard'].create({
+            env = self.env(context={
+                **self.env.context,
+                'allowed_company_ids': [hotel.company_id.id],
+                'force_company': hotel.company_id.id,
+            })
+            wizard = env['pms.sync.wizard'].create({
                 'hotel_ids': [(4, hotel.id)],
                 'from_date': yesterday,
                 'to_date': yesterday,
@@ -125,12 +130,13 @@ class PMSCredentials(models.Model):
 
             if str.upper(desc_type) == 'TAX' or str.upper(desc_type)=='TAXES':
                 mapping = self.env['pms.tax.mapping'].search([
-                ('pms_tax_id', '=', str(desc_unk_id))], limit=1)
+                ('pms_tax_id', '=', str(desc_unk_id)),('hotel_id','=',self.id)], limit=1)
 
                 vals = {
                     'pms_tax_name': desc_name,
-                    # 'hotel_id': self.id,
+                    'hotel_id': self.id,
                     'pms_tax_id': str(desc_unk_id),
+                    'company_id': self.company_id.id,
                 }
                 
                 if mapping:
@@ -140,6 +146,7 @@ class PMSCredentials(models.Model):
             else:
                 mapping = self.env['pms.account.mapping'].search([
                     ('pms_account_header_id', '=', header_id),
+                    ('hotel_id','=',self.id)
                 ], limit=1)
 
                 vals = {}
@@ -148,6 +155,8 @@ class PMSCredentials(models.Model):
                 else:
                     vals['pms_account_header_id'] = header_id
                     vals['pms_account_header_name'] = header_name
+                    vals['hotel_id'] = self.id
+                    vals['company_id'] = self.company_id.id
                     self.env['pms.account.mapping'].create(vals)
 
             # elif 'TAX' in desc_type:

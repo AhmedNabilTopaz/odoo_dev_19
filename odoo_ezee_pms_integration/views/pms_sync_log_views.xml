@@ -9,6 +9,7 @@
                 <field name="hotel_id"/>
                 <field name="api_type"/>
                 <field name="sync_date"/>
+                <field name="sync_date_to"/>
                 <field name="status" widget="badge" decoration-success="status == 'success'" decoration-danger="status == 'failed'"/>
             </list>
         </field>
@@ -25,6 +26,8 @@
                             <field name="hotel_id"/>
                             <field name="api_type"/>
                             <field name="sync_date"/>
+                            <field name="sync_date_to"/>
+
                         </group>
                         <group>
                             <field name="status"/>
@@ -36,7 +39,7 @@
                             <field name="request_payload"/>
                         </page>
                         <page string="Response">
-                            <field name="response_payload"/>
+                            <field name="response_payload"  options="{'mode': 'json'}" />
                         </page>
                         <page string="Error" invisible="not error_message">
                             <field name="error_message"/>
