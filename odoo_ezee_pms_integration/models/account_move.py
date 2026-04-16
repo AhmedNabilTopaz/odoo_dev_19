@@ -107,7 +107,14 @@ class AccountMove(models.Model):
         ('pms_tran_id_unique', 'unique(pms_tran_id, pms_hotel_id, move_type)', 'PMS Transaction ID must be unique per hotel and type!')
     ]
 
-
+    def get_extra_print_items(self):
+        self.ensure_one()
+        # commercial_partner_id can be empty on PMS-generated invoices.
+        # Odoo's account_edi_ubl_cii calls ensure_one() on it, which crashes.
+        # If there's no partner, skip the UBL/CII chain entirely.
+        if not self.commercial_partner_id:
+            return []
+        return super().get_extra_print_items()
 
 class AccountPayment(models.Model):
     _inherit = 'account.payment'
