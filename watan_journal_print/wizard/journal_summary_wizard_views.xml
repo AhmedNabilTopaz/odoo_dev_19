@@ -57,7 +57,7 @@
     <menuitem
         id="menu_watan_journal_summary"
         name="Journal Account Summary (eZee)"
-        parent="account.menu_finance_reports"
+        parent="odoo_ezee_pms_integration.menu_pms_integration_root"
         action="action_open_journal_summary_wizard"
         sequence="99"/>
 

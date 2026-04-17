@@ -41,9 +41,11 @@ class JournalSummaryWizard(models.TransientModel):
             groupby=['account_id'],
             aggregates=['debit:sum', 'credit:sum'],
         )
+        print("GROUPS ===>", groups)
 
         lines = []
         for account, total_debit, total_credit in groups:
+            print("ACCOUNT:", account, account.id, account.name)
             lines.append({
                 'wizard_id': self.id,
                 'account_id': account.id,
@@ -55,6 +57,7 @@ class JournalSummaryWizard(models.TransientModel):
 
         if lines:
             self.env['watan.journal.summary.line'].create(lines)
+            print("LINES CREATED:", len(lines))
 
         return {
             'type': 'ir.actions.act_window',
@@ -64,14 +67,29 @@ class JournalSummaryWizard(models.TransientModel):
             'target': 'new',
         }
 
+    # def action_print_pdf(self):
+    #     """Print PDF directly (auto-computes if lines not yet loaded)."""
+    #     self.ensure_one()
+    #     if not self.summary_line_ids:
+    #         self.action_preview()
+    #     return self.env.ref(
+    #         'watan_journal_print.action_report_journal_summary'
+    #     ).report_action(self)
+
     def action_print_pdf(self):
         """Print PDF directly (auto-computes if lines not yet loaded)."""
         self.ensure_one()
         if not self.summary_line_ids:
             self.action_preview()
+
+        # 1. تحديد لغة المستخدم الحالي
+        user_lang = self.env.context.get('lang') or self.env.user.lang
+
+        # 2. إرسال اللغة للتقرير عن طريق with_context
         return self.env.ref(
             'watan_journal_print.action_report_journal_summary'
-        ).report_action(self)
+        ).with_context(lang=user_lang).report_action(self)
+
 
 
 class JournalSummaryLine(models.TransientModel):

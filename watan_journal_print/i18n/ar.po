@@ -1,0 +1,169 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* watan_journal_print
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-16 12:00+0000\n"
+"PO-Revision-Date: 2026-04-16 12:00+0000\n"
+"Language-Team: Arabic\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ar\n"
+
+#. module: watan_journal_print
+#: model:ir.actions.act_window,name:watan_journal_print.action_open_journal_summary_wizard
+#: model_terms:ir.ui.view,arch_db:watan_journal_print.view_journal_summary_wizard_form
+#: model_terms:ir.ui.view,arch_db:watan_journal_print.report_journal_summary_document
+msgid "Journal Account Summary"
+msgstr "ملخص حسابات اليومية"
+
+#. module: watan_journal_print
+#: model:ir.ui.menu,name:watan_journal_print.menu_watan_journal_summary
+msgid "Journal Account Summary (eZee)"
+msgstr "ملخص حسابات اليومية (إيزي)"
+
+#. module: watan_journal_print
+#: model:ir.model,name:watan_journal_print.model_watan_journal_summary_wizard
+msgid "Journal Summary Print Wizard"
+msgstr "معالج طباعة ملخص اليومية"
+
+#. module: watan_journal_print
+#: model:ir.model.fields,field_description:watan_journal_print.field_watan_journal_summary_wizard__company_id
+msgid "Hotel / Company"
+msgstr "الفندق / الشركة"
+
+#. module: watan_journal_print
+#: model:ir.model.fields,field_description:watan_journal_print.field_watan_journal_summary_wizard__date_from
+msgid "Date From"
+msgstr "من تاريخ"
+
+#. module: watan_journal_print
+#: model:ir.model.fields,field_description:watan_journal_print.field_watan_journal_summary_wizard__date_to
+msgid "Date To"
+msgstr "إلى تاريخ"
+
+#. module: watan_journal_print
+#: model:ir.model.fields,field_description:watan_journal_print.field_watan_journal_summary_wizard__summary_line_ids
+msgid "Account Totals"
+msgstr "إجماليات الحسابات"
+
+#. module: watan_journal_print
+#: model:ir.model,name:watan_journal_print.model_watan_journal_summary_line
+msgid "Journal Summary Line"
+msgstr "بند ملخص اليومية"
+
+#. module: watan_journal_print
+#: model:ir.model.fields,field_description:watan_journal_print.field_watan_journal_summary_line__account_code
+#: model_terms:ir.ui.view,arch_db:watan_journal_print.view_journal_summary_wizard_form
+#: model_terms:ir.ui.view,arch_db:watan_journal_print.report_journal_summary_document
+msgid "Code"
+msgstr "الكود"
+
+#. module: watan_journal_print
+#: model:ir.model.fields,field_description:watan_journal_print.field_watan_journal_summary_line__account_name
+#: model_terms:ir.ui.view,arch_db:watan_journal_print.report_journal_summary_document
+msgid "Account Name"
+msgstr "اسم الحساب"
+
+#. module: watan_journal_print
+#: model:ir.model.fields,field_description:watan_journal_print.field_watan_journal_summary_line__account_id
+#: model_terms:ir.ui.view,arch_db:watan_journal_print.view_journal_summary_wizard_form
+msgid "Account"
+msgstr "الحساب"
+
+#. module: watan_journal_print
+#: model:ir.model.fields,field_description:watan_journal_print.field_watan_journal_summary_line__total_debit
+#: model_terms:ir.ui.view,arch_db:watan_journal_print.view_journal_summary_wizard_form
+msgid "Debit"
+msgstr "مدين"
+
+#. module: watan_journal_print
+#: model:ir.model.fields,field_description:watan_journal_print.field_watan_journal_summary_line__total_credit
+#: model_terms:ir.ui.view,arch_db:watan_journal_print.view_journal_summary_wizard_form
+msgid "Credit"
+msgstr "دائن"
+
+#. module: watan_journal_print
+#: model:ir.model.fields,field_description:watan_journal_print.field_watan_journal_summary_line__balance
+#: model_terms:ir.ui.view,arch_db:watan_journal_print.view_journal_summary_wizard_form
+msgid "Balance"
+msgstr "الرصيد"
+
+#. module: watan_journal_print
+#: model_terms:ir.ui.view,arch_db:watan_journal_print.view_journal_summary_wizard_form
+msgid "Total Debit"
+msgstr "إجمالي المدين"
+
+#. module: watan_journal_print
+#: model_terms:ir.ui.view,arch_db:watan_journal_print.view_journal_summary_wizard_form
+msgid "Total Credit"
+msgstr "إجمالي الدائن"
+
+#. module: watan_journal_print
+#: model_terms:ir.ui.view,arch_db:watan_journal_print.view_journal_summary_wizard_form
+msgid "Total Balance"
+msgstr "إجمالي الرصيد"
+
+#. module: watan_journal_print
+#: model_terms:ir.ui.view,arch_db:watan_journal_print.view_journal_summary_wizard_form
+msgid "Load Preview"
+msgstr "عرض البيانات"
+
+#. module: watan_journal_print
+#: model_terms:ir.ui.view,arch_db:watan_journal_print.view_journal_summary_wizard_form
+msgid "Print PDF"
+msgstr "طباعة PDF"
+
+#. module: watan_journal_print
+#: model_terms:ir.ui.view,arch_db:watan_journal_print.view_journal_summary_wizard_form
+msgid "Cancel"
+msgstr "إلغاء"
+
+#. module: watan_journal_print
+#: model_terms:ir.ui.view,arch_db:watan_journal_print.report_journal_summary_document
+msgid "Period:"
+msgstr "الفترة:"
+
+#. module: watan_journal_print
+#: model_terms:ir.ui.view,arch_db:watan_journal_print.report_journal_summary_document
+msgid "Filter: Accounts containing"
+msgstr "تصفية: الحسابات التي تحتوي على"
+
+#. module: watan_journal_print
+#: model_terms:ir.ui.view,arch_db:watan_journal_print.report_journal_summary_document
+msgid "Debit (SR)"
+msgstr "مدين (ريال)"
+
+#. module: watan_journal_print
+#: model_terms:ir.ui.view,arch_db:watan_journal_print.report_journal_summary_document
+msgid "Credit (SR)"
+msgstr "دائن (ريال)"
+
+#. module: watan_journal_print
+#: model_terms:ir.ui.view,arch_db:watan_journal_print.report_journal_summary_document
+msgid "Balance (SR)"
+msgstr "الرصيد (ريال)"
+
+#. module: watan_journal_print
+#: model_terms:ir.ui.view,arch_db:watan_journal_print.report_journal_summary_document
+msgid "TOTAL"
+msgstr "الإجمالي"
+
+#. module: watan_journal_print
+#: model_terms:ir.ui.view,arch_db:watan_journal_print.report_journal_summary_document
+msgid "accounts"
+msgstr "حسابات"
+
+#. module: watan_journal_print
+#: model_terms:ir.ui.view,arch_db:watan_journal_print.report_journal_summary_document
+msgid "Generated:"
+msgstr "تاريخ الإصدار:"
+
+#. module: watan_journal_print
+#: model_terms:ir.ui.view,arch_db:watan_journal_print.report_journal_summary_document
+msgid "Posted entries only"
+msgstr "القيود المُرحلة فقط"
