@@ -19,12 +19,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:watan_journal_print.view_journal_summary_wizard_form
 #: model_terms:ir.ui.view,arch_db:watan_journal_print.report_journal_summary_document
 msgid "Journal Account Summary"
-msgstr "ملخص حسابات اليومية"
+msgstr "إجمالي القيود اليومية"
 
 #. module: watan_journal_print
 #: model:ir.ui.menu,name:watan_journal_print.menu_watan_journal_summary
 msgid "Journal Account Summary (eZee)"
-msgstr "ملخص حسابات اليومية (إيزي)"
+msgstr "إجمالي القيود اليومية"
 
 #. module: watan_journal_print
 #: model:ir.model,name:watan_journal_print.model_watan_journal_summary_wizard
@@ -124,11 +124,15 @@ msgid "Cancel"
 msgstr "إلغاء"
 
 #. module: watan_journal_print
+#: model:ir.model.fields,field_description:watan_journal_print.field_watan_journal_summary_line__account_code
+#: model_terms:ir.ui.view,arch_db:watan_journal_print.view_journal_summary_wizard_form
 #: model_terms:ir.ui.view,arch_db:watan_journal_print.report_journal_summary_document
 msgid "Period:"
 msgstr "الفترة:"
 
 #. module: watan_journal_print
+#: model:ir.model.fields,field_description:watan_journal_print.field_watan_journal_summary_line__account_code
+#: model_terms:ir.ui.view,arch_db:watan_journal_print.view_journal_summary_wizard_form
 #: model_terms:ir.ui.view,arch_db:watan_journal_print.report_journal_summary_document
 msgid "Filter: Accounts containing"
 msgstr "تصفية: الحسابات التي تحتوي على"
@@ -149,11 +153,15 @@ msgid "Balance (SR)"
 msgstr "الرصيد (ريال)"
 
 #. module: watan_journal_print
+#: model:ir.model.fields,field_description:watan_journal_print.field_watan_journal_summary_line__account_code
+#: model_terms:ir.ui.view,arch_db:watan_journal_print.view_journal_summary_wizard_form
 #: model_terms:ir.ui.view,arch_db:watan_journal_print.report_journal_summary_document
 msgid "TOTAL"
 msgstr "الإجمالي"
 
 #. module: watan_journal_print
+#: model:ir.model.fields,field_description:watan_journal_print.field_watan_journal_summary_line__account_code
+#: model_terms:ir.ui.view,arch_db:watan_journal_print.view_journal_summary_wizard_form
 #: model_terms:ir.ui.view,arch_db:watan_journal_print.report_journal_summary_document
 msgid "accounts"
 msgstr "حسابات"

@@ -9,7 +9,9 @@
             <form string="Journal Account Summary">
                 <group>
                     <group>
-                        <field name="company_id"/>
+<!--                        <field name="company_id"/>-->
+                        <field name="allowed_company_ids" invisible="1"/>
+                        <field name="company_id" domain="[('id', 'in', allowed_company_ids)]"/>
                     </group>
                     <group>
                         <field name="date_from"/>

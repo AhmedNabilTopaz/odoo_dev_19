@@ -15,8 +15,11 @@
     <!-- QWeb PDF Document Sub-Template -->
     <template id="report_journal_summary_document">
         <t t-call="web.internal_layout">
-            <t t-set="wiz" t-value="wiz.with_context(lang=wiz.env.context.get('lang'))"/>
-            <div class="page">
+            <t t-set="lang_code" t-value="lang or wiz.env.context.get('lang') or wiz.env.user.lang or 'en_US'"/>
+            <t t-set="is_arabic" t-value="lang_code.startswith('ar')"/>
+            <t t-set="wiz" t-value="wiz.with_context(lang=lang_code)"/>
+
+            <div class="page" t-att-dir="'rtl' if is_arabic else 'ltr'">
 
                 <!-- Report Header -->
                 <div style="text-align:center; margin-bottom:20px;">
@@ -24,18 +27,26 @@
                     <h3 style="margin-top:0; color:#444;">
                         <t t-esc="wiz.company_id.name"/>
                     </h3>
+
                     <p style="color:#666; font-size:12px; margin:0;">
-                        <span>Period:</span>
-                        <strong>
-                            <t t-esc="wiz.date_from"/>
-                        </strong>
-                        &amp;nbsp;→&amp;nbsp;
-                        <strong>
-                            <t t-esc="wiz.date_to"/>
-                        </strong>
-                        &amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;
-                        <span>Filter: Accounts containing</span>
-                        <strong>إيزي</strong>
+                        <t t-if="is_arabic">
+                            <span>الفترة:</span>
+                            <strong><t t-esc="wiz.date_from"/></strong>
+                            <span> → </span>
+                            <strong><t t-esc="wiz.date_to"/></strong>
+                            <span> | </span>
+                            <span>تصفية: الحسابات التي تحتوي على</span>
+                            <strong> إيزي</strong>
+                        </t>
+                        <t t-else="">
+                            <span>Period:</span>
+                            <strong><t t-esc="wiz.date_from"/></strong>
+                            <span> → </span>
+                            <strong><t t-esc="wiz.date_to"/></strong>
+                            <span> | </span>
+                            <span>Filter: Accounts containing</span>
+                            <strong> eZee</strong>
+                        </t>
                     </p>
                 </div>
 
@@ -45,8 +56,8 @@
                 <table style="width:100%; border-collapse:collapse; font-size:11px;">
                     <thead>
                         <tr style="background-color:#2c3e50; color:white;">
-                            <th style="padding:7px 10px; text-align:left; width:12%;">Code</th>
-                            <th style="padding:7px 10px; text-align:left; width:40%;">Account Name</th>
+                            <th t-attf-style="padding:7px 10px; text-align: {{ 'right' if is_arabic else 'left' }}; width:12%;">Code</th>
+                            <th t-attf-style="padding:7px 10px; text-align: {{ 'right' if is_arabic else 'left' }}; width:40%;">Account Name</th>
                             <th style="padding:7px 10px; text-align:right; width:16%;">Debit (SR)</th>
                             <th style="padding:7px 10px; text-align:right; width:16%;">Credit (SR)</th>
                             <th style="padding:7px 10px; text-align:right; width:16%;">Balance (SR)</th>
@@ -55,10 +66,10 @@
                     <tbody>
                         <t t-foreach="wiz.summary_line_ids" t-as="line">
                             <tr t-attf-style="background-color: {{ '#f9f9f9' if line_index % 2 == 0 else 'white' }};">
-                                <td style="padding:6px 10px; border-bottom:1px solid #e0e0e0;">
+                                <td t-attf-style="padding:6px 10px; border-bottom:1px solid #e0e0e0; text-align: {{ 'right' if is_arabic else 'left' }};">
                                     <t t-esc="line.account_code"/>
                                 </td>
-                                <td style="padding:6px 10px; border-bottom:1px solid #e0e0e0;">
+                                <td t-attf-style="padding:6px 10px; border-bottom:1px solid #e0e0e0; text-align: {{ 'right' if is_arabic else 'left' }};">
                                     <t t-esc="line.account_name"/>
                                 </td>
                                 <td style="padding:6px 10px; text-align:right; border-bottom:1px solid #e0e0e0;">
@@ -77,11 +88,19 @@
                     <!-- Totals Footer -->
                     <tfoot>
                         <tr style="background-color:#2c3e50; color:white; font-weight:bold;">
-                            <td colspan="2" style="padding:8px 10px;">
-                                <span>TOTAL</span>
-                                (
-                                <t t-esc="len(wiz.summary_line_ids)"/>
-                                <span>accounts</span>)
+                            <td colspan="2" t-attf-style="padding:8px 10px; text-align: {{ 'right' if is_arabic else 'left' }};">
+                                <t t-if="is_arabic">
+                                    <span>الإجمالي</span>
+                                    <span>(</span>
+                                    <t t-esc="len(wiz.summary_line_ids)"/>
+                                    <span> حسابات)</span>
+                                </t>
+                                <t t-else="">
+                                    <span>TOTAL</span>
+                                    <span> (</span>
+                                    <t t-esc="len(wiz.summary_line_ids)"/>
+                                    <span> accounts)</span>
+                                </t>
                             </td>
                             <td style="padding:8px 10px; text-align:right;">
                                 <t t-esc="'{:,.2f}'.format(sum(wiz.summary_line_ids.mapped('total_debit')))"/>
@@ -97,13 +116,20 @@
                 </table>
 
                 <!-- Footer note -->
-                <p style="font-size:9px; color:#aaa; margin-top:20px; text-align:right;">
-                    <span>Generated:</span>
-                    <t t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
-                    &amp;nbsp;|&amp;nbsp;
-                    <span>Posted entries only</span>
+                <p t-attf-style="font-size:9px; color:#aaa; margin-top:20px; text-align: {{ 'left' if is_arabic else 'right' }};">
+                    <t t-if="is_arabic">
+                        <span>تاريخ الإصدار:</span>
+                        <t t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
+                        <span> | </span>
+                        <span>القيود المُرحلة فقط</span>
+                    </t>
+                    <t t-else="">
+                        <span>Generated:</span>
+                        <t t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
+                        <span> | </span>
+                        <span>Posted entries only</span>
+                    </t>
                 </p>
-
             </div>
         </t>
     </template>
@@ -112,7 +138,7 @@
     <template id="report_journal_summary_template">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="wiz">
-                <t t-set="lang" t-value="wiz.env.context.get('lang') or wiz.env.user.lang"/>
+                <t t-set="lang" t-value="wiz.env.context.get('lang') or wiz.env.user.lang or 'en_US'"/>
                 <t t-call="watan_journal_print.report_journal_summary_document" t-lang="lang"/>
             </t>
         </t>
