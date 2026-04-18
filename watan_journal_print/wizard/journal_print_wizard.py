@@ -21,6 +21,16 @@ class JournalLinePrintWizard(models.TransientModel):
         default=lambda self: self.env.company,
     )
 
+    allowed_company_ids = fields.Many2many(
+        'res.company',
+        compute='_compute_allowed_company_ids',
+    )
+
+    @api.depends_context('allowed_company_ids')
+    def _compute_allowed_company_ids(self):
+        for rec in self:
+            rec.allowed_company_ids = self.env.companies
+
     @api.model
     def default_get(self, fields_list):
         res = super().default_get(fields_list)

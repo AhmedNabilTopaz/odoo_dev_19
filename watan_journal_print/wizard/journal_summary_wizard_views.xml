@@ -9,9 +9,11 @@
             <form string="Journal Account Summary">
                 <group>
                     <group>
-<!--                        <field name="company_id"/>-->
-                        <field name="allowed_company_ids" invisible="1"/>
-                        <field name="company_id" domain="[('id', 'in', allowed_company_ids)]"/>
+                    <!-- Hidden field that feeds the domain -->
+                    <field name="allowed_company_ids" invisible="1"/>
+                    
+                    <!-- Now domain references the stored field, not the context -->
+                    <field name="company_id" domain="[('id', 'in', allowed_company_ids)]"/>
                     </group>
                     <group>
                         <field name="date_from"/>

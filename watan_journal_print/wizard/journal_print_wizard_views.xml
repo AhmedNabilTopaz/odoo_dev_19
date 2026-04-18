@@ -27,7 +27,8 @@
         <field name="arch" type="xml">
             <form string="Print Journal Lines">
                 <group>
-                    <field name="company_id"/>
+                    <field name="allowed_company_ids" invisible="1"/>
+                    <field name="company_id" domain="[('id', 'in', allowed_company_ids)]"/>
                     <field name="date_from"/>
                     <field name="date_to"/>
                 </group>

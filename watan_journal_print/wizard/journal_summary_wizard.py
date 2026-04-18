@@ -18,6 +18,7 @@ class JournalSummaryWizard(models.TransientModel):
         compute='_compute_allowed_company_ids',
     )
 
+
     date_from = fields.Date(string='Date From', required=True)
     date_to = fields.Date(string='Date To', required=True)
 
@@ -27,14 +28,10 @@ class JournalSummaryWizard(models.TransientModel):
         string='Account Totals',
     )
 
-    @api.depends_context('allowed_company_ids', 'company')
+    @api.depends_context('allowed_company_ids')
     def _compute_allowed_company_ids(self):
-        current_company = self.env.company
-        allowed_companies = self.env.user.company_ids
-        if current_company.parent_id:
-            allowed_companies = current_company
-        for wizard in self:
-            wizard.allowed_company_ids = allowed_companies
+        for rec in self:
+            rec.allowed_company_ids = self.env.companies
 
 
     def action_preview(self):
