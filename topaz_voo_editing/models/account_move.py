@@ -43,12 +43,12 @@ class AccountMove(models.Model):
         if 'stock_move_id' in self._fields and self.stock_move_id and self.stock_move_id.picking_id:
             picking = self.stock_move_id.picking_id
 
-        # allowed_codes = ["500002", "500012", "500007", "500008"]
-        #
-        # move_accounts = self.line_ids.mapped("account_id.code")
-        #
-        # if not any(code in allowed_codes for code in move_accounts) and not (picking and "RTN" in picking.name):
-        #     return
+        allowed_codes = ["500002", "500012", "500007", "500008"]
+
+        move_accounts = self.line_ids.mapped("account_id.code")
+
+        if not any(code in allowed_codes for code in move_accounts) and not (picking and "RTN" in picking.name):
+            return
 
         journal_entries_channel = self.env.ref('topaz_voo_editing.channel_journal_notifications', False)
         if not journal_entries_channel:
@@ -195,6 +195,10 @@ class AccountMove(models.Model):
 
         _logger.info("---- END Move %s ----", self.id)
 
+    def get_extra_print_items(self):
+        if not self.commercial_partner_id:
+            return []
+        return super().get_extra_print_items()
 
 class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
