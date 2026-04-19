@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_vending_machine_list" model="ir.actions.act_window">
+        <field name="name">Vending Machines</field>
+        <field name="res_model">vending.machine</field>
+        <!-- FIX: view_mode tree → list for Odoo 19 -->
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create and manage vending machines linked to your POS.
+            </p>
+        </field>
+    </record>
+
+    <!-- FIX: <tree> → <list> for Odoo 19 -->
+    <record id="view_vending_machine_tree" model="ir.ui.view">
+        <field name="name">vending.machine.list</field>
+        <field name="model">vending.machine</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="location"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_vending_machine_form" model="ir.ui.view">
+        <field name="name">vending.machine.form</field>
+        <field name="model">vending.machine</field>
+        <field name="arch" type="xml">
+            <form string="Vending Machine">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="location"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <menuitem id="menu_pos_vending_machine"
+              name="Vending Machines"
+              parent="point_of_sale.menu_point_config_product"
+              action="action_vending_machine_list"
+              sequence="15"/>
+</odoo>

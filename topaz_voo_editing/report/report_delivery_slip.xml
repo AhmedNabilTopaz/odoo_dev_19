@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_deliveryslip_inherit_po_location"
+              inherit_id="stock.report_delivery_document">
+
+        <xpath expr="//div[@name='div_origin']" position="after">
+
+            <t t-if="o.name and 'RTN' in o.name">
+
+                <!-- PO Field -->
+                <div t-if="o.purchase_id" class="col-auto col-3 mw-100 mb-2" name="div_po">
+                    <strong>Purchase Order:</strong>
+                    <p class="m-0">
+                        <a t-att-href="'/web#id=%s&amp;model=purchase.order&amp;view_type=form' % (o.purchase_id.id)"
+                           style="color:#1a73e8; text-decoration: underline;">
+                            <span t-esc="o.purchase_id.name"/>
+                        </a>
+                    </p>
+                </div>
+
+                <!-- Location fields in separate columns -->
+                <div class="col-auto col-3 mw-100 mb-2">
+                    <strong>From:</strong>
+                    <p class="m-0" t-esc="o.location_id.complete_name"/>
+                </div>
+
+                <div class="col-auto col-3 mw-100 mb-2">
+                    <strong>To:</strong>
+                    <p class="m-0" t-esc="o.location_dest_id.complete_name"/>
+                </div>
+
+            </t>
+
+        </xpath>
+
+    </template>
+
+</odoo>
+

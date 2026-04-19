@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="stock_report_picking_inherit_topaz_voo" inherit_id="stock.report_picking">
+        <xpath expr="//div[@t-field='o.name']" position="after">
+            <div t-field="o.name" align="center"/>
+        </xpath>
+        <xpath expr="//tbody/t/tr/td/span" position="after">
+            <div t-field="ml.product_id.barcode" align="center"/>
+        </xpath>
+        <xpath expr="//div[@t-field='o.picking_type_id.warehouse_id.partner_id']" position="after">
+            <div>
+                <strong>TO:</strong>
+                <p t-field="o.location_dest_id.complete_name"/>
+            </div>
+        </xpath>
+
+    </template>
+    <template id="report_inventory_inherit_topaz_voo"
+              inherit_id="stock.report_inventory">
+        <xpath expr="//table/thead/tr/th[2]" position="after">
+            <th name="th_barcode">
+                <strong>Barcode</strong>
+            </th>
+            <th>
+                <strong>Category</strong>
+            </th>
+            <th>
+                <strong>Vendor</strong>
+            </th>
+        </xpath>
+
+        <xpath expr="//table/tbody/t[1]/tr[2]/td[2]" position="after">
+            <t t-if="line.product_id.product_tmpl_id.barcode">
+                <td name="td_product_barcode" class="text-center">
+                    <img t-att-src="'/report/barcode/EAN13/'+line.product_id.product_tmpl_id.barcode"
+                         style="width:300x;height:50px" alt="Barcode"/>
+                    <strong t-field="line.product_id.product_tmpl_id.barcode"/>
+                </td>
+            </t>
+            <t t-else="">
+                <td>
+
+                </td>
+            </t>
+            <t t-if="line.product_id.product_tmpl_id.categ_id">
+                <td name="td_product_category" class="text-center">
+                    <strong t-field="line.product_id.product_tmpl_id.categ_id.name"/>
+                </td>
+            </t>
+            <t t-else="">
+                <td>
+
+                </td>
+            </t>
+            <t t-if="line.product_id.seller_ids">
+                <t t-foreach="line.product_id.seller_ids" t-as="seller">
+                    <td name="td_product_vendor" class="text-center">
+                        <strong t-field="seller.display_name"/>
+                    </td>
+                </t>
+            </t>
+            <t t-else="">
+                <td>
+
+                </td>
+            </t>
+
+
+        </xpath>
+        <!--         <xpath expr="//table/tbody/t[1]/tr[2]/td[7]" position="after">-->
+        <!--            <t t-if="line.product_id.product_tmpl_id.barcode">-->
+        <!--                <td name="td_product_barcode" class="text-center">-->
+        <!--                    <strong t-field="line.product_id.product_tmpl_id.standard_price"/>-->
+        <!--                </td>-->
+        <!--            </t>-->
+        <!--            <t t-else="">-->
+        <!--                <td>-->
+
+        <!--                </td>-->
+        <!--            </t>-->
+        <!--        </xpath>-->
+    </template>
+
+
+</odoo>

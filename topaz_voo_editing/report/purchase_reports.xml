@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_purchase_order_barcode" model="ir.actions.report">
+        <field name="name">Quotation / Order</field>
+        <field name="model">purchase.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">topaz_voo_editing.report_purchaseorder_barcode</field>
+        <field name="report_file">topaz_voo_editing.report_purchaseorder_barcode</field>
+        <field name="print_report_name">(object.state in ('draft', 'sent') and ('Request for Quotation - %s - Barcode' % object.name) or ('%s - Purchase Order - %s - %s' % (object.partner_id.name, object.name, object.picking_type_id.name)))</field>
+        <field name="binding_model_id" ref="purchase.model_purchase_order"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_purchaseorder_document_barcode"
+              inherit_id="purchase.report_purchaseorder_document"
+              primary="True">
+        <xpath expr="//th[@name='th_description']" position="after">
+            <th name="th_barcode" class="text-center">
+                <strong>Barcode</strong>
+            </th>
+        </xpath>
+
+        <xpath expr="//td[@id='product']" position="after">
+            <td class="text-center">
+                <t t-if="line.product_id.product_tmpl_id.barcode">
+                    <img t-att-src="'/report/barcode/?barcode_type=Code128&amp;value=%s&amp;width=300&amp;height=50' % (line.product_id.product_tmpl_id.barcode)"
+                         style="width:300px;height:50px"
+                         alt="Barcode"/>
+                    <br/>
+                    <span t-field="line.product_id.product_tmpl_id.barcode"/>
+                </t>
+            </td>
+        </xpath>
+    </template>
+
+    <template id="report_purchaseorder_barcode">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="topaz_voo_editing.report_purchaseorder_document_barcode"
+                   t-lang="o.partner_id.lang"/>
+            </t>
+        </t>
+    </template>
+</odoo>

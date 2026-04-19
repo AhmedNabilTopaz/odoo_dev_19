@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    <data>-->
+    <record id="purchase_order_form_inherit_topaz" model="ir.ui.view">
+        <field name="name">purchase_order_form_inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="priority">1</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_ref']" position="after">
+                <field name="picking_type_id"
+                       domain="[('code','=','incoming'), '|', ('warehouse_id', '=', False), ('warehouse_id.company_id', '=', company_id)]"
+                       options="{'no_create': True}"
+                       groups="stock.group_stock_multi_locations"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="product_supplierinfo_tree_view_inherit_topaz" model="ir.ui.view">
+        <field name="name">product.supplierinfo.tree.view.inherit.topaz</field>
+        <field name="model">product.supplierinfo</field>
+        <field name="priority">1</field>
+        <field name="inherit_id" ref="product.product_supplierinfo_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_tmpl_id']" position="after">
+                <field name="barcode" readonly="1" optional="hide"/>
+                <field name="tax_name" readonly="1" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="stock_view_picking_form_inherit_topaz" model="ir.ui.view">
+        <field name="name">stock_view_picking_form_inherit_topaz</field>
+        <field name="model">stock.picking</field>
+        <field name="priority">1</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_uom']" position="after">
+                <field name="po_uom" readonly="1" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="product_template_form_inherit_topaz" model="ir.ui.view">
+        <field name="name">product_template_form_inherit_topaz</field>
+        <field name="model">product.template</field>
+        <field name="priority">1</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_tag_ids']" position="after">
+                <field name="status_topaz"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="product_template_tree_inherit_topaz" model="ir.ui.view">
+        <field name="name">product_template_tree_inherit_topaz</field>
+        <field name="model">product.template</field>
+        <field name="priority">1</field>
+        <field name="inherit_id" ref="product.product_template_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='uom_id']" position="after">
+                <field name="sale_ok"/>
+            </xpath>
+        </field>
+    </record>
+    <!--    </data>-->
+</odoo>

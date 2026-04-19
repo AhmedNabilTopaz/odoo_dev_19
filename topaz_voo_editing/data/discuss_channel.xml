@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    <data>-->
+    <!-- FIX: mail.channel renamed to discuss.channel in Odoo 17+ -->
+    <record id="channel_journal_notifications" model="discuss.channel">
+        <field name="name">Journal Entries Notifications</field>
+        <field name="group_ids" eval="[(6, 0, [ref('topaz_voo_editing.group_creative_push_notification')])]"/>
+    </record>
+    <!--    </data>-->
+</odoo>

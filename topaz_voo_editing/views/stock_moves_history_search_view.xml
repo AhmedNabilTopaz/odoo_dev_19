@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--    <data>-->
+    <record id="search_stock_moves_history_view_edit_topaz" model="ir.ui.view">
+        <field name="name">search.stock.moves.history.view.edit.topaz</field>
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="stock.stock_move_line_view_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='groupby']" position="inside">
+                <filter string="Vendor" name="by_vendor" domain="[]" context="{'group_by': 'vendor_id'}"/>
+            </xpath>
+        </field>
+    </record>
+    <!--    </data>-->
+</odoo>
