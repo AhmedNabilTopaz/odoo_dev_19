@@ -44,6 +44,7 @@ class JournalSummaryWizard(models.TransientModel):
             ('date', '>=', self.date_from),
             ('date', '<=', self.date_to),
             ('move_id.state', '=', 'posted'),
+            ('transaction_id', '!=', False),
             '|', '|',
             ('account_id.name', 'ilike', 'إيزي'),
             ('account_id.code', '=', '201017'),

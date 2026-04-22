@@ -145,3 +145,55 @@ class AccountPayment(models.Model):
     sql_constraints = [
         ('pms_tran_id_unique', 'unique(pms_tran_id, pms_hotel_id, payment_type)', 'PMS Transaction ID must be unique per hotel and payment type!')
     ]
+
+
+class AccountMoveLine(models.Model):
+    _inherit = 'account.move.line'
+
+    transaction_id = fields.Char(
+        string='Transaction ID',
+        compute='_compute_transaction_id',
+        store=True,
+        index=True,
+    )
+
+    @api.depends(
+        'move_id.pms_tran_id',
+        'payment_id.pms_tran_id',
+        'payment_id.reconciled_invoice_ids.pms_tran_id',
+        'payment_id.reconciled_bill_ids.pms_tran_id',
+        'matched_debit_ids.debit_move_id.move_id.pms_tran_id',
+        'matched_credit_ids.credit_move_id.move_id.pms_tran_id',
+    )
+    def _compute_transaction_id(self):
+        invoice_move_types = (
+            'out_invoice',
+            'out_refund',
+            'out_receipt',
+            'in_invoice',
+            'in_refund',
+            'in_receipt',
+        )
+        for line in self:
+            transaction_id = line.move_id.pms_tran_id or False
+
+            if not transaction_id and line.payment_id and line.payment_id.pms_tran_id:
+                transaction_id = line.payment_id.pms_tran_id
+
+            if not transaction_id and line.payment_id:
+                payment_invoices = (
+                    line.payment_id.reconciled_invoice_ids |
+                    line.payment_id.reconciled_bill_ids
+                ).filtered(lambda move: move.pms_tran_id)
+                transaction_id = payment_invoices[:1].pms_tran_id or False
+
+            if not transaction_id:
+                reconciled_invoices = (
+                    line.matched_debit_ids.debit_move_id.move_id |
+                    line.matched_credit_ids.credit_move_id.move_id
+                ).filtered(
+                    lambda move: move.move_type in invoice_move_types and move.pms_tran_id
+                )
+                transaction_id = reconciled_invoices[:1].pms_tran_id or False
+
+            line.transaction_id = transaction_id
