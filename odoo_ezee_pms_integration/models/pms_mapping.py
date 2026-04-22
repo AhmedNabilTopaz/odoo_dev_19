@@ -15,6 +15,53 @@ class PMSAccountMapping(models.Model):
     account_group_id = fields.Many2one('account.group', string='Odoo Account Group')
     account_id = fields.Many2one('account.account', string='Odoo Account')
     company_id = fields.Many2one('res.company', string='Company')
+    line_ids = fields.One2many(
+        'pms.account.mapping.line',
+        'mapping_id',
+        string='Detailed Lines',
+    )
+
+
+class PMSAccountMappingLine(models.Model):
+    _name = 'pms.account.mapping.line'
+    _description = 'PMS Account Mapping Line'
+
+    mapping_id = fields.Many2one(
+        'pms.account.mapping',
+        string='Account Mapping',
+        required=True,
+        ondelete='cascade',
+    )
+    hotel_id = fields.Many2one(
+        'pms.credentials',
+        string='Hotel',
+        related='mapping_id.hotel_id',
+        store=True,
+        readonly=True,
+    )
+    pms_account_id = fields.Char(string='Entity ID (descriptionunkid)', required=True)
+    pms_account_name = fields.Char(string='Entity (description)')
+    pms_account_type_id = fields.Char(string='Sub Reference ID (descriptiontypeunkid)')
+    pms_account_type_name = fields.Char(string='Sub Reference (descriptiontype)')
+    account_group_id = fields.Many2one('account.group', string='Odoo Account Group')
+    account_id = fields.Many2one('account.account', string='Odoo Account')
+    company_id = fields.Many2one(
+        'res.company',
+        string='Company',
+        related='mapping_id.company_id',
+        store=True,
+        readonly=True,
+    )
+
+    _sql_constraints = [
+        (
+            'pms_account_mapping_line_unique',
+            'unique(mapping_id, pms_account_id)',
+            'The PMS account line must be unique per account mapping.',
+        ),
+    ]
+
+
 class PMSTaxMapping(models.Model):
     _name = 'pms.tax.mapping'
     _description = 'PMS Tax Mapping'

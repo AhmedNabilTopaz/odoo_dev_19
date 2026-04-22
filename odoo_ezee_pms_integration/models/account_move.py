@@ -108,11 +108,10 @@ class AccountMove(models.Model):
     ]
 
     def get_extra_print_items(self):
-        self.ensure_one()
-        # commercial_partner_id can be empty on PMS-generated invoices.
-        # Odoo's account_edi_ubl_cii calls ensure_one() on it, which crashes.
-        # If there's no partner, skip the UBL/CII chain entirely.
-        if not self.commercial_partner_id:
+        # get_extra_print_items() requires a singleton.
+        # Guard against both multi-record calls (list view selection)
+        # and invoices with no commercial_partner_id (PMS-generated records).
+        if len(self) != 1 or not self.commercial_partner_id:
             return []
         return super().get_extra_print_items()
 

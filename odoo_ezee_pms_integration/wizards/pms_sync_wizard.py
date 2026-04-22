@@ -171,6 +171,9 @@ class PMSSyncWizard(models.TransientModel):
                 ref_name = detail.get('reference_name')
                 line_name = detail.get('charge_name') or 'PMS Charge'
                 amount = self._parse_ezee_amount(detail.get('amount'))
+                reference_id = detail['reference_id']
+                sub_ref2_value=detail['sub_ref2_value']
+                sub_ref2_id=detail['sub_ref2_id']
                 if move_type == 'out_refund':
                     amount = abs(amount)
                 if record_id not in lines:
@@ -182,7 +185,16 @@ class PMSSyncWizard(models.TransientModel):
                     ], limit=1)
                     account_id = False
                     if mapping:
-                        account_id = mapping.account_id.id
+                        mapping_line=False
+                        if sub_ref2_value:
+                            mapping_line = self.env['pms.account.mapping.line'].search([
+                    ('mapping_id', '=', mapping.id),
+                    ('pms_account_id', '=', sub_ref2_value),('hotel_id','=',hotel.id)
+                ], limit=1)
+                        if mapping_line and mapping_line.account_id:
+                            account_id=mapping_line.account_id.id
+                        else:
+                            account_id = mapping.account_id.id
                     elif hotel.journal_id.default_account_id:
                         account_id = hotel.journal_id.default_account_id.id
                     elif income_account:

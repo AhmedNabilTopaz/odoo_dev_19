@@ -119,8 +119,8 @@ class PMSCredentials(models.Model):
 
         for rec in records:
             desc_type = str(rec.get('descriptiontype', '')).upper()
-            desc_type_unk_id = int(rec.get('descriptiontypeunkid', 0) )
-            desc_unk_id = rec.get('descriptionunkid', 0)
+            desc_type_unk_id = rec.get('descriptiontypeunkid')
+            desc_unk_id = str(rec.get('descriptionunkid') or '')
             desc_name = rec.get('description')
             header_id=int(rec.get('headerid'))
             header_name=rec.get('header')
@@ -149,16 +149,36 @@ class PMSCredentials(models.Model):
                     ('hotel_id','=',self.id)
                 ], limit=1)
 
-                vals = {}
-                if mapping:
-                    continue
-                else:
-                    vals['pms_account_header_id'] = header_id
-                    vals['pms_account_header_name'] = header_name
-                    vals['hotel_id'] = self.id
-                    vals['company_id'] = self.company_id.id
-                    self.env['pms.account.mapping'].create(vals)
+                if not mapping:
+                    mapping = self.env['pms.account.mapping'].create({
+                        'pms_account_header_id': header_id,
+                        'pms_account_header_name': header_name,
+                        'hotel_id': self.id,
+                        'company_id': self.company_id.id,
+                    })
 
+                if not desc_unk_id:
+                    continue
+
+                mapping_line = self.env['pms.account.mapping.line'].search([
+                    ('mapping_id', '=', mapping.id),
+                    ('pms_account_id', '=', desc_unk_id),('hotel_id','=',self.id)
+                ], limit=1)
+                if not mapping_line:
+                    mapping_line = self.env['pms.account.mapping.line'].create({
+                        'mapping_id': mapping.id,
+                        'pms_account_id': desc_unk_id,
+                        'pms_account_name': desc_name,
+                        'pms_account_type_id': desc_type_unk_id,
+                        'pms_account_type_name': rec.get('descriptiontype'),
+                    })
+                    mapping.write({
+                        'line_ids': [(4, mapping_line.id)]
+                    })
+                else:
+                     mapping.write({
+                        'line_ids': [(4, mapping_line.id)]
+                    })
             # elif 'TAX' in desc_type:
             #     mapping = self.env['pms.tax.mapping'].search([
             #         ('hotel_id', '=', self.id),
