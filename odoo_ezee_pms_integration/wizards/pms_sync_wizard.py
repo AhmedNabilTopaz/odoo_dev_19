@@ -174,6 +174,7 @@ class PMSSyncWizard(models.TransientModel):
                 reference_id = detail['reference_id']
                 sub_ref2_value=detail['sub_ref2_value']
                 sub_ref2_id=detail['sub_ref2_id']
+                description=detail['description']
                 if move_type == 'out_refund':
                     amount = abs(amount)
                 if record_id not in lines:
@@ -184,30 +185,31 @@ class PMSSyncWizard(models.TransientModel):
                         ('hotel_id', '=', hotel.id)
                     ], limit=1)
                     account_id = False
+                    analytic_account_id =False
                     if mapping:
+                        account_id = mapping.account_id.id
                         mapping_line=False
                         if sub_ref2_value:
                             mapping_line = self.env['pms.account.mapping.line'].search([
-                    ('mapping_id', '=', mapping.id),
-                    ('pms_account_id', '=', sub_ref2_value),('hotel_id','=',hotel.id)
-                ], limit=1)
-                        if mapping_line and mapping_line.account_id:
-                            account_id=mapping_line.account_id.id
-                        else:
-                            account_id = mapping.account_id.id
+                                    ('mapping_id', '=', mapping.id),
+                                    ('pms_account_id', '=', sub_ref2_value),('hotel_id','=',hotel.id)
+                                ], limit=1)
+                        if mapping_line and mapping_line.analytic_account_id:
+                            analytic_account_id=mapping_line.analytic_account_id.id
                     elif hotel.journal_id.default_account_id:
                         account_id = hotel.journal_id.default_account_id.id
                     elif income_account:
                         account_id = income_account.id
                     lines[record_id] = {
                         'name': line_name,
+                        'description': description,
                         'discount': 0,
                         'account_id': account_id,
                         'price_unit': amount,
                         'quantity': 1,
                         'tax_ids': [],
                         'analytic_distribution': {
-                            str(hotel.analytic_account_id.id): 100} if hotel.analytic_account_id else {},
+                            str(analytic_account_id): 100} if analytic_account_id else {},
                     }
 
                 if ref_name == 'Taxes':
@@ -406,7 +408,7 @@ class PMSSyncWizard(models.TransientModel):
                 if not company_partner.property_account_receivable_id or company_partner.property_account_receivable_id != default_receivable:
                     company_partner.write({'property_account_receivable_id': default_receivable.id})
             person_partner = False
-            if record.get('reference7') and record.get('reference5'):
+            if record.get('reference7') and record.get('reference5') and not record.get('reference7')==record.get('reference5'):
                 # Get or create the person contact linked to the company
                 person_partner = self.env['res.partner'].sudo().search([
                     ('name', '=', person_name),

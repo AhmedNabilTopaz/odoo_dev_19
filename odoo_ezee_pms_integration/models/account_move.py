@@ -74,8 +74,8 @@ class AccountMove(models.Model):
         invoices = self.search([
             ('move_type', '=', 'out_invoice'),
             ('state', '=', 'posted'),
-            ('payment_state', 'in', ['not_paid', 'partial']),
-        ])
+            ('payment_state', 'in', ['not_paid', 'partial'])
+        ], limit=2000)
 
         for invoice in invoices:
 
@@ -115,37 +115,6 @@ class AccountMove(models.Model):
             return []
         return super().get_extra_print_items()
 
-class AccountPayment(models.Model):
-    _inherit = 'account.payment'
-
-    pms_tran_id = fields.Char(string='PMS Transaction ID', copy=False, index=True)
-    pms_hotel_id = fields.Many2one('pms.credentials', string='PMS Hotel', copy=False)
-    pms_reference = fields.Char(string='PMS Reference', copy=False)
-    # eZee Info fields
-    ezee_id = fields.Char(string='Ezee ID', readonly=True, copy=False)
-    ezee_guest_name = fields.Char(string='Guest Name', readonly=True, copy=False)
-    ezee_reservation_number = fields.Char(string='Reservation Number', readonly=True, copy=False)
-    ezee_folio_number = fields.Char(string='Folio Number', readonly=True, copy=False)
-    ezee_type = fields.Char(string='eZee Payment Type', readonly=True, copy=False)
-    ezee_room_number = fields.Char(string='Room Number', readonly=True, copy=False)
-    ezee_checkin_date = fields.Date(string='Check-In Date', readonly=True, copy=False)
-    ezee_checkout_date = fields.Date(string='Check-Out Date', readonly=True, copy=False)
-    ezee_receipt_no = fields.Char(string='Receipt Number', readonly=True, copy=False)
-    ezee_invoice_no = fields.Char(string='Invoice Number', readonly=True, copy=False)
-    ezee_bill_name = fields.Char(string='Bill To Name', readonly=True, copy=False)
-    ezee_amount = fields.Float(string='Amount', readonly=True, copy=False)
-    ezee_payment_method = fields.Char(string='eZee Payment Method', readonly=True, copy=False)
-    ezee_voucher_type=fields.Char(string='Voucher Type', readonly=True)
-    ezee_voucher_number=fields.Char(string='OTA Voucher Number', readonly=True)
-    ezee_credit_number=fields.Char(string='Credit Number', readonly=True)
-    remarks=fields.Char(string='Remarks', readonly=True)
-    market=fields.Char(string='Market', readonly=True)
-    bussiness_source_name=fields.Char(string='Business Source', readonly=True)
-
-    sql_constraints = [
-        ('pms_tran_id_unique', 'unique(pms_tran_id, pms_hotel_id, payment_type)', 'PMS Transaction ID must be unique per hotel and payment type!')
-    ]
-
 
 class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'
@@ -156,6 +125,7 @@ class AccountMoveLine(models.Model):
         store=True,
         index=True,
     )
+    description = fields.Char(string='Description')
 
     @api.depends(
         'move_id.pms_tran_id',
@@ -197,3 +167,37 @@ class AccountMoveLine(models.Model):
                 transaction_id = reconciled_invoices[:1].pms_tran_id or False
 
             line.transaction_id = transaction_id
+
+
+
+class AccountPayment(models.Model):
+    _inherit = 'account.payment'
+
+    pms_tran_id = fields.Char(string='PMS Transaction ID', copy=False, index=True)
+    pms_hotel_id = fields.Many2one('pms.credentials', string='PMS Hotel', copy=False)
+    pms_reference = fields.Char(string='PMS Reference', copy=False)
+    # eZee Info fields
+    ezee_id = fields.Char(string='Ezee ID', readonly=True, copy=False)
+    ezee_guest_name = fields.Char(string='Guest Name', readonly=True, copy=False)
+    ezee_reservation_number = fields.Char(string='Reservation Number', readonly=True, copy=False)
+    ezee_folio_number = fields.Char(string='Folio Number', readonly=True, copy=False)
+    ezee_type = fields.Char(string='eZee Payment Type', readonly=True, copy=False)
+    ezee_room_number = fields.Char(string='Room Number', readonly=True, copy=False)
+    ezee_checkin_date = fields.Date(string='Check-In Date', readonly=True, copy=False)
+    ezee_checkout_date = fields.Date(string='Check-Out Date', readonly=True, copy=False)
+    ezee_receipt_no = fields.Char(string='Receipt Number', readonly=True, copy=False)
+    ezee_invoice_no = fields.Char(string='Invoice Number', readonly=True, copy=False)
+    ezee_bill_name = fields.Char(string='Bill To Name', readonly=True, copy=False)
+    ezee_amount = fields.Float(string='Amount', readonly=True, copy=False)
+    ezee_payment_method = fields.Char(string='eZee Payment Method', readonly=True, copy=False)
+    ezee_voucher_type=fields.Char(string='Voucher Type', readonly=True)
+    ezee_voucher_number=fields.Char(string='OTA Voucher Number', readonly=True)
+    ezee_credit_number=fields.Char(string='Credit Number', readonly=True)
+    remarks=fields.Char(string='Remarks', readonly=True)
+    market=fields.Char(string='Market', readonly=True)
+    bussiness_source_name=fields.Char(string='Business Source', readonly=True)
+
+    sql_constraints = [
+        ('pms_tran_id_unique', 'unique(pms_tran_id, pms_hotel_id, payment_type)', 'PMS Transaction ID must be unique per hotel and payment type!')
+    ]
+

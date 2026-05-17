@@ -51,8 +51,7 @@
                                     <field name="pms_account_name"/>
                                     <field name="pms_account_type_id"/>
                                     <field name="pms_account_type_name"/>
-                                    <field name="account_group_id"/>
-                                    <field name="account_id"/>
+                                    <field name="analytic_account_id"/>
                                     <field name="company_id" optional="hide"/>
                                 </list>
                             </field>

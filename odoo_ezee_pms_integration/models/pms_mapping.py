@@ -43,8 +43,7 @@ class PMSAccountMappingLine(models.Model):
     pms_account_name = fields.Char(string='Entity (description)')
     pms_account_type_id = fields.Char(string='Sub Reference ID (descriptiontypeunkid)')
     pms_account_type_name = fields.Char(string='Sub Reference (descriptiontype)')
-    account_group_id = fields.Many2one('account.group', string='Odoo Account Group')
-    account_id = fields.Many2one('account.account', string='Odoo Account')
+    analytic_account_id = fields.Many2one('account.analytic.account', string='Analytic Account')
     company_id = fields.Many2one(
         'res.company',
         string='Company',

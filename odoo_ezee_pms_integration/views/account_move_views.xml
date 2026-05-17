@@ -105,6 +105,10 @@
                     </group>
                 </page>
             </xpath>
+            <!-- Add description field to move lines in form -->
+            <xpath expr="//sheet/notebook/page[1]/field[@name='invoice_line_ids']/list/field[@name='analytic_distribution']" position="after">
+                <field name="description" optional="show"/>
+            </xpath>
         </field>
     </record>
 
@@ -135,6 +139,18 @@
                 <field name="pms_tran_id"/>
                 <field name="pms_reference"/>
             </search>
+        </field>
+    </record>
+        <!-- Inherit Move Line Tree View -->
+    <record id="view_move_line_tree_inherit_pms" model="ir.ui.view">
+        <field name="name">account.move.line.tree.inherit.pms</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_move_line_tree"/>
+        <field name="arch" type="xml">
+            <!-- Add description field after name field -->
+            <field name="name" position="after">
+                <field name="description" optional="show"/>
+            </field>
         </field>
     </record>
 </odoo>
