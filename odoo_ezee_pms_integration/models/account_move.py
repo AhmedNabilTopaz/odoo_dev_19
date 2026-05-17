@@ -126,6 +126,8 @@ class AccountMoveLine(models.Model):
         index=True,
     )
     description = fields.Char(string='Description')
+    ezee_reservation_number = fields.Char(related='move_id.ezee_reservation_number', string='Reservation Number', store=True)
+    ezee_folio_number = fields.Char(related='move_id.ezee_folio_number', string='Folio Number', store=True)
 
     @api.depends(
         'move_id.pms_tran_id',

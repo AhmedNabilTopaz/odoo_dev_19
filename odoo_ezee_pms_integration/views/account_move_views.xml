@@ -150,6 +150,8 @@
             <!-- Add description field after name field -->
             <field name="name" position="after">
                 <field name="description" optional="show"/>
+                <field name="ezee_reservation_number" optional="show"/>
+                <field name="ezee_folio_number" optional="show"/>
             </field>
         </field>
     </record>
