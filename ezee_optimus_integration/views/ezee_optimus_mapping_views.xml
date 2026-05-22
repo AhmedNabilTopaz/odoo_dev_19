@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_ezee_optimus_mapping_list" model="ir.ui.view">
+        <field name="name">ezee.optimus.account.mapping.list</field>
+        <field name="model">ezee.optimus.account.mapping</field>
+        <field name="arch" type="xml">
+            <list string="Account Mapping" editable="bottom" create="0">
+                <field name="header_id" readonly="1"/>
+                <field name="header_name" readonly="1"/>
+                <field name="desc_type_id" readonly="1" optional="hide"/>
+                <field name="desc_type_name" readonly="1"/>
+                <field name="ezee_desc_unk_id" readonly="1" optional="hide"/>
+                <field name="description" readonly="1"/>
+                <field name="odoo_account_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_ezee_optimus_mapping_search" model="ir.ui.view">
+        <field name="name">ezee.optimus.account.mapping.search</field>
+        <field name="model">ezee.optimus.account.mapping</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="header_name"/>
+                <field name="description"/>
+                <filter string="Missing Odoo Account" name="missing_account" domain="[('odoo_account_id', '=', False)]"/>
+                <filter string="Header Name" name="group_by_header" context="{'group_by': 'header_name'}" separator="1"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_ezee_optimus_mapping" model="ir.actions.act_window">
+        <field name="name">Account Mapping</field>
+        <field name="res_model">ezee.optimus.account.mapping</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_missing_account': 1}</field>
+    </record>
+
+    <menuitem id="menu_ezee_optimus_mapping" name="Account Mapping" parent="menu_ezee_optimus_root" action="action_ezee_optimus_mapping" sequence="20"/>
+</odoo>

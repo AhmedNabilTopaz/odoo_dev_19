@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_import_config" model="ir.actions.server">
+        <field name="name">Import Config from Optimus</field>
+        <field name="model_id" ref="model_ezee_optimus_sync"/>
+        <field name="state">code</field>
+        <field name="code">
+action = env['ezee.optimus.sync'].sudo().create({}).action_import_config()
+        </field>
+    </record>
+
+    <menuitem id="menu_ezee_import_config" name="Import Config" parent="menu_ezee_optimus_root" action="action_import_config" sequence="30"/>
+</odoo>
