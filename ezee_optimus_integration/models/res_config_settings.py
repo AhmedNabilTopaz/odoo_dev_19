@@ -1,46 +1,45 @@
+import base64
+import logging
+
 from odoo import fields, models
 from odoo.exceptions import UserError
+
+_logger = logging.getLogger(__name__)
 
 class ResConfigSettings(models.TransientModel):
     _inherit = 'res.config.settings'
 
-    # eZee Optimus POS credentials
-    optimus_hotel_code = fields.Char(
-        string='eZee Optimus Hotel Code',
-        config_parameter='ezee_optimus.hotel_code'
+    optimus_company_id = fields.Char(
+        string='eZee Optimus Company ID',
+        config_parameter='ezee_optimus.company_id'
     )
-    optimus_username = fields.Char(
-        string='eZee Optimus Username',
-        config_parameter='ezee_optimus.username'
-    )
-    optimus_password = fields.Char(
-        string='eZee Optimus Password',
-        config_parameter='ezee_optimus.password'
+    optimus_auth_code = fields.Char(
+        string='eZee Optimus Auth Code',
+        config_parameter='ezee_optimus.auth_code'
     )
     optimus_base_url = fields.Char(
-        string='eZee Optimus Base URL',
-        default='https://api.ipos247.com/v1/fas/',
+        string='eZee Optimus API URL',
+        default='https://app.ipos247.com/app/cloudPOS/sl/interfaceapi/index.php/xeroaccountinterface/eoaccounts',
         config_parameter='ezee_optimus.base_url'
     )
 
     def _get_optimus_connection(self):
-        """Returns (base_url, hotel_code, headers) tuple for API calls."""
         ICP = self.env['ir.config_parameter'].sudo()
-        hotel_code = (ICP.get_param('ezee_optimus.hotel_code') or '').strip()
-        username = (ICP.get_param('ezee_optimus.username') or '').strip()
-        password = (ICP.get_param('ezee_optimus.password') or '').strip()
-        base_url = ICP.get_param('ezee_optimus.base_url',
-                                 'https://api.ipos247.com/v1/fas/')
-        base_url = (base_url or '').strip()
+        company_id = (ICP.get_param('ezee_optimus.company_id') or '').strip()
+        auth_code = (ICP.get_param('ezee_optimus.auth_code') or '').strip()
+        base_url = (ICP.get_param(
+            'ezee_optimus.base_url',
+            'https://app.ipos247.com/app/cloudPOS/sl/interfaceapi/index.php/xeroaccountinterface/eoaccounts'
+        ) or '').strip()
 
-        if not all([hotel_code, username, password]):
+        _logger.info('eZee Optimus | company_id: "%s" | auth_code: "%s..." | url: "%s"',
+                     company_id, auth_code[:10] if auth_code else '', base_url)
+
+        if not all([company_id, auth_code, base_url]):
             raise UserError(
                 'eZee Optimus credentials are not configured. '
-                'Go to Accounting > Configuration > Settings and fill Hotel Code, Username, and Password.'
+                'Go to Accounting > Configuration > Settings and fill Company ID and Auth Code.'
             )
 
-        headers = {
-            'Content-Type': 'application/json',
-        }
-        auth = (username, password)
-        return base_url, hotel_code, headers, auth
+        headers = {'Content-Type': 'application/json'}
+        return base_url, company_id, auth_code, headers

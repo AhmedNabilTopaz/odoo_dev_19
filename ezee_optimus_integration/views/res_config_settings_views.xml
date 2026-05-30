@@ -7,25 +7,20 @@
         <field name="arch" type="xml">
             <xpath expr="//block[@id='account_vendor_bills']" position="after">
                 <block title="eZee Optimus POS Integration" id="ezee_optimus_settings">
-                    <setting id="ezee_optimus_hotel_code"
-                             string="Hotel Code"
-                             help="Hotel code provided by eZee Optimus for API access.">
-                        <field name="optimus_hotel_code" placeholder="XXXX"/>
-                    </setting>
-                    <setting id="ezee_optimus_username"
-                             string="Username"
-                             help="API username used for HTTP Basic authentication.">
-                        <field name="optimus_username" placeholder="eZee API username"/>
-                    </setting>
-                    <setting id="ezee_optimus_password"
-                             string="Password"
-                             help="API password used for HTTP Basic authentication.">
-                        <field name="optimus_password" password="True" placeholder="eZee API password"/>
+                    <setting id="ezee_optimus_company_id"
+                             string="Company ID"
+                             help="Optimus company ID used as comanyunkid in the Xero account interface API.">
+                        <field name="optimus_company_id" placeholder="59557"/>
                     </setting>
                     <setting id="ezee_optimus_base_url"
-                             string="Base URL"
-                             help="Base endpoint for the eZee Optimus FAS APIs.">
+                             string="API URL"
+                             help="Endpoint for the Optimus Xero account interface API.">
                         <field name="optimus_base_url" class="w-100"/>
+                    </setting>
+                    <setting id="ezee_optimus_auth_code"
+                             string="Auth Code"
+                             help="Authentication code provided by eZee for the Optimus Xero account interface API.">
+                        <field name="optimus_auth_code"/>
                     </setting>
                 </block>
             </xpath>
