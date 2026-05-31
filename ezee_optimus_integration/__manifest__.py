@@ -2,9 +2,8 @@
     'name': 'eZee Optimus POS Integration',
     'version': '19.0.1.0.0',
     'summary': 'One-way sync from eZee Optimus POS to Odoo 19',
-    'author': 'SwissBlue Hotel Jeddah',
-    'category': 'Accounting/Accounting',
-    'license': 'LGPL-3',
+    'author': 'Dubaiincario',
+    'category': 'Accounting',
     'depends': ['account', 'base_setup'],
     'data': [
         'security/ir.model.access.csv',
@@ -15,4 +14,6 @@
         'data/ir_cron_data.xml',
     ],
     'installable': True,
+    'application': True,
+    'license': 'LGPL-3',
 }
