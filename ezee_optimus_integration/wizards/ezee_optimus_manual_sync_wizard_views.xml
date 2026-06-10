@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_ezee_optimus_manual_sync_wizard_form" model="ir.ui.view">
+        <field name="name">ezee.optimus.manual.sync.wizard.form</field>
+        <field name="model">ezee.optimus.manual.sync.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <label for="hotel_ids" string="Hotels"/>
+                    <field name="hotel_ids" widget="many2many_tags"/>
+                    <group col="2">
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                    </group>
+                </group>
+                <group string="Sync Options">
+                    <group>
+                        <field name="sync_sales"/>
+                        <!--<field name="sync_account_mapping"/>-->
+                    </group>
+                    <group>
+                        <!--<field name="sync_sales"/>-->
+                        <field name="sync_purchase"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_sync" string="Start Sync" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ezee_optimus_manual_sync_wizard" model="ir.actions.act_window">
+        <field name="name">Manual Sync</field>
+        <field name="res_model">ezee.optimus.manual.sync.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_ezee_optimus_manual_sync"
+              name="Manual Sync"
+              parent="menu_ezee_optimus_root"
+              action="action_ezee_optimus_manual_sync_wizard"
+              groups="ezee_optimus_integration.group_ezee_optimus_gateway_manager"
+              sequence="100"/>
+</odoo>

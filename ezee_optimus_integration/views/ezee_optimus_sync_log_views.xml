@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_ezee_optimus_sync_log_list" model="ir.ui.view">
+        <field name="name">ezee.optimus.sync.log.list</field>
+        <field name="model">ezee.optimus.sync.log</field>
+        <field name="arch" type="xml">
+            <list create="0" edit="0">
+                <field name="create_date"/>
+                <field name="hotel_id"/>
+                <field name="sync_type"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="status"/>
+                <field name="response_status_code"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_ezee_optimus_sync_log_form" model="ir.ui.view">
+        <field name="name">ezee.optimus.sync.log.form</field>
+        <field name="model">ezee.optimus.sync.log</field>
+        <field name="arch" type="xml">
+            <form create="0" edit="0">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="hotel_id"/>
+                            <field name="sync_type"/>
+                            <field name="status"/>
+                        </group>
+                        <group>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <field name="create_date"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Request">
+                            <group>
+                                <field name="request_url"/>
+                                <field name="request_headers"/>
+                                <field name="request_payload"/>
+                            </group>
+                        </page>
+                        <page string="Response">
+                            <group>
+                                <field name="response_status_code"/>
+                                <field name="response_body"/>
+                                <field name="error_message"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_ezee_optimus_sync_log_search" model="ir.ui.view">
+        <field name="name">ezee.optimus.sync.log.search</field>
+        <field name="model">ezee.optimus.sync.log</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="hotel_id"/>
+                <field name="sync_type"/>
+                <field name="status"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <filter string="Failed" name="failed" domain="[('status', '=', 'failed')]"/>
+                <filter string="Success" name="success" domain="[('status', '=', 'success')]"/>
+                <filter string="Hotel" name="group_by_hotel" context="{'group_by': 'hotel_id'}"/>
+                <filter string="Sync Type" name="group_by_sync_type" context="{'group_by': 'sync_type'}"/>
+                <filter string="Status" name="group_by_status" context="{'group_by': 'status'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_ezee_optimus_sync_log" model="ir.actions.act_window">
+        <field name="name">Sync Logs</field>
+        <field name="res_model">ezee.optimus.sync.log</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_ezee_optimus_sync_log"
+              name="Sync Log"
+              parent="menu_ezee_optimus_root"
+              action="action_ezee_optimus_sync_log"
+              groups="ezee_optimus_integration.group_ezee_optimus_gateway_user"
+              sequence="40"/>
+</odoo>

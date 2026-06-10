@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_ezee_optimus_root"
+              name="Ezee Optimus Gateway"
+              parent="accountant.menu_accounting"
+              groups="ezee_optimus_integration.group_ezee_optimus_gateway_user"
+              sequence="110"/>
+</odoo>

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data noupdate="1">
-        <record id="ir_cron_ezee_optimus_daily" model="ir.cron">
-            <field name="name">eZee Optimus: Daily Sync</field>
-            <field name="model_id" ref="model_ezee_optimus_sync"/>
-            <field name="state">code</field>
-            <field name="code">model._cron_daily_sync()</field>
-            <field name="interval_number">1</field>
-            <field name="interval_type">days</field>
-            <field name="active">True</field>
-        </record>
-    </data>
+    <record id="ir_cron_ezee_optimus_daily" model="ir.cron">
+        <field name="name">eZee Optimus: Daily Sync</field>
+        <field name="model_id" ref="ezee_optimus_integration.model_ezee_optimus_sync"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_daily_sync()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="active">True</field>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="nextcall" eval="(datetime.now() + timedelta(days=1)).replace(hour=9, minute=0, second=0)"/>
+        <field name="priority">5</field>
+    </record>
 </odoo>

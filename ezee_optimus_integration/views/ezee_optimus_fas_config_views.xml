@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_ezee_optimus_fas_config_form" model="ir.ui.view">
+        <field name="name">ezee.optimus.fas.config.form</field>
+        <field name="model">ezee.optimus.fas.config</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_test_connection" string="Test Connection" type="object" class="oe_highlight"/>
+                    <button name="action_get_pull_master" string="Pull Master Data" type="object"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group string="API Credentials">
+                            <field name="name"/>
+                            <field name="optimus_company_id"/>
+                            <field name="username"/>
+                            <field name="password" password="True"/>
+                        </group>
+                        <group string="Odoo Configuration">
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="journal_id"/>
+                            <field name="debt_transfer_journal_id"/>
+                            <field name="analytic_account_id" invisible="1"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <group string="FAS Environment">
+                        <field name="auth_code"/>
+                        <field name="base_url" readonly="1"/>
+                        <field name="working_date"/>
+                        <field name="currency_code"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_ezee_optimus_fas_config_list" model="ir.ui.view">
+        <field name="name">ezee.optimus.fas.config.list</field>
+        <field name="model">ezee.optimus.fas.config</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="company_id"/>
+                <field name="optimus_company_id"/>
+                <field name="journal_id"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_ezee_optimus_fas_config" model="ir.actions.act_window">
+        <field name="name">FAS Configuration</field>
+        <field name="res_model">ezee.optimus.fas.config</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('company_id', 'in', allowed_company_ids)]</field>
+        <field name="context">{'allowed_company_ids': allowed_company_ids}</field>
+    </record>
+
+    <menuitem id="menu_ezee_optimus_fas_config"
+              name="FAS Configuration"
+              parent="menu_ezee_optimus_root"
+              action="action_ezee_optimus_fas_config"
+              groups="ezee_optimus_integration.group_ezee_optimus_gateway_manager"
+              sequence="10"/>
+</odoo>
+<!--
+
+*eZee Optimus*
+22888: 1746174052a06f61fb-d96d-11eb-b
+59557: 8627718946f9d7a783-ee16-11f0-a
+59207: 7983704477b51f1a20-ebbe-11f0-a
+59208: 62318418605ce15a27-ebc1-11f0-a
+59081: 9378926827cf2b2f58-ebc2-11f0-a
+59068: 3287465566f2597fdc-ebc4-11f0-a
+
+-->

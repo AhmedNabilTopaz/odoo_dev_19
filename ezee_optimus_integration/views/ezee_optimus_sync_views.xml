@@ -5,9 +5,19 @@
         <field name="model_id" ref="model_ezee_optimus_sync"/>
         <field name="state">code</field>
         <field name="code">
-action = env['ezee.optimus.sync'].sudo().create({}).action_import_config()
+configs = env['ezee.optimus.fas.config'].sudo().search([('active', '=', True)])
+for config in configs:
+    env['ezee.optimus.sync'].with_context(fas_config_id=config.id).sudo().create({}).action_import_config()
+action = {
+    'type': 'ir.actions.client',
+    'tag': 'display_notification',
+    'params': {
+        'title': 'Import Complete',
+        'message': '%s active FAS configuration(s) processed.' % len(configs),
+        'type': 'success',
+    },
+}
         </field>
     </record>
 
-    <menuitem id="menu_ezee_import_config" name="Import Config" parent="menu_ezee_optimus_root" action="action_import_config" sequence="30"/>
 </odoo>

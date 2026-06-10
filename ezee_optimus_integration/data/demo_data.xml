@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="fas_config_demo_swissblue_jazan" model="ezee.optimus.fas.config">
+        <field name="name">SwissBlue Apartment Hotel Jazan</field>
+        <field name="optimus_company_id">59557</field>
+        <field name="auth_code">8627718946f9d7a783-ee16-11f0-a</field>
+        <field name="username">Abdalla Hassan Elfouly</field>
+        <field name="password">Aa@12345</field>
+        <field name="active" eval="True"/>
+    </record>
+
+    <record id="fas_config_demo_tulip_alrawdah" model="ezee.optimus.fas.config">
+        <field name="name">Tulip Alrawdah Serviced Apartments</field>
+        <field name="optimus_company_id">59207</field>
+        <field name="auth_code">7983704477b51f1a20-ebbe-11f0-a</field>
+        <field name="username">Abdalla Hassan Elfouly</field>
+        <field name="password">Aa@12345</field>
+        <field name="active" eval="True"/>
+    </record>
+
+    <record id="fas_config_demo_vinas_riyadh" model="ezee.optimus.fas.config">
+        <field name="name">Vinas Riyadh Serviced Apartments</field>
+        <field name="optimus_company_id">59208</field>
+        <field name="auth_code">62318418605ce15a27-ebc1-11f0-a</field>
+        <field name="username">Abdalla Hassan Elfouly</field>
+        <field name="password">Aa@12345</field>
+        <field name="active" eval="True"/>
+    </record>
+
+    <record id="fas_config_demo_swissblue_alzahraa" model="ezee.optimus.fas.config">
+        <field name="name">SwissBlue Serviced Apartments Alzahraa District</field>
+        <field name="optimus_company_id">59081</field>
+        <field name="auth_code">9378926827cf2b2f58-ebc2-11f0-a</field>
+        <field name="username">Abdalla Hassan Elfouly</field>
+        <field name="password">Aa@12345</field>
+        <field name="active" eval="True"/>
+    </record>
+
+    <record id="fas_config_demo_swissblue_alsamer" model="ezee.optimus.fas.config">
+        <field name="name">SwissBlue Serviced Apartments Alsamer District</field>
+        <field name="optimus_company_id">59068</field>
+        <field name="auth_code">3287465566f2597fdc-ebc4-11f0-a</field>
+        <field name="username">Abdalla Hassan Elfouly</field>
+        <field name="password">Aa@12345</field>
+        <field name="active" eval="True"/>
+    </record>
+
+    <record id="fas_config_demo_swissblue_jeddah" model="ezee.optimus.fas.config">
+        <field name="name">SwissBlue Hotel Jeddah</field>
+        <field name="optimus_company_id">22888</field>
+        <field name="auth_code">1746174052a06f61fb-d96d-11eb-b</field>
+        <field name="username">Abdalla Hassan Elfouly</field>
+        <field name="password">Aa@12345</field>
+        <field name="active" eval="True"/>
+    </record>
+</odoo>

@@ -5,6 +5,18 @@ class EzeeOptimusOutlet(models.Model):
     _description = 'eZee Optimus F&B Outlet'
     _rec_name = 'name'
 
+    hotel_id = fields.Many2one(
+        'ezee.optimus.fas.config',
+        string='Hotel',
+        ondelete='cascade',
+    )
+    company_id = fields.Many2one(
+        'res.company',
+        string='Company',
+        related='hotel_id.company_id',
+        store=True,
+        readonly=True,
+    )
     ezee_outlet_id = fields.Char(
         string='eZee Outlet ID', required=True, index=True,
         help='The numeric ID returned by get_store_name API'
@@ -36,6 +48,12 @@ class EzeeOptimusOutlet(models.Model):
     )
 
     _sql_constraints = [
-        ('unique_ezee_outlet_id', 'UNIQUE(ezee_outlet_id)',
-         'Each eZee outlet ID must be unique.')
+        ('unique_ezee_outlet_per_hotel', 'UNIQUE(ezee_outlet_id, hotel_id)',
+         'Each eZee outlet ID must be unique per hotel.')
     ]
+
+    def init(self):
+        self.env.cr.execute(
+            'ALTER TABLE "ezee_optimus_outlet" '
+            'DROP CONSTRAINT IF EXISTS "ezee_optimus_outlet_unique_ezee_outlet_id"'
+        )
